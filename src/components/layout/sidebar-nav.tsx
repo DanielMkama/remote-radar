@@ -44,10 +44,6 @@ export function SidebarNav({ onNavigate, className }: SidebarNavProps) {
           );
         })}
       </nav>
-
-      <div className="border-t px-4 py-3">
-        <p className="text-xs text-muted-foreground">Source: Remotive (mock data)</p>
-      </div>
     </div>
   );
 }
