@@ -57,7 +57,17 @@ export function SummaryCards({ jobs, targetMin, targetMax }: SummaryCardsProps) 
           <CardContent className="flex h-full items-start justify-between gap-2">
             <div className="flex min-w-0 flex-1 flex-col gap-1.5">
               <p className="truncate text-xs font-medium text-muted-foreground">{label}</p>
-              <p className="truncate text-xl font-semibold tracking-tight tabular-nums">{value}</p>
+              {/*
+                No truncate/ellipsis: a wide value (e.g. a custom salary
+                range like "$500-$12,500") should shrink to fit narrow
+                mobile cards rather than get cut off with "…". Stays on one
+                line (whitespace-nowrap); the card's own overflow-hidden is
+                the only backstop for a truly extreme value, and clips
+                silently (no ellipsis character) rather than truncating.
+              */}
+              <p className="whitespace-nowrap text-base font-semibold tracking-tight tabular-nums sm:text-xl">
+                {value}
+              </p>
               <p className="truncate text-xs text-muted-foreground">{hint}</p>
             </div>
             <Icon className="size-4 shrink-0 text-muted-foreground" strokeWidth={1.75} />

@@ -46,10 +46,6 @@ export function AppShell({ children }: { children: ReactNode }) {
             <Radar className="size-4.5" strokeWidth={1.75} />
             <span className="text-sm font-semibold">Remote Design Radar</span>
           </div>
-          <div className="ml-auto flex items-center gap-2 text-xs text-muted-foreground">
-            <span className="hidden sm:inline">Source: Remotive</span>
-            <span className="rounded-full bg-muted px-2 py-0.5 font-medium">Mock data</span>
-          </div>
         </header>
 
         <main className="flex-1 px-4 py-6 md:px-6 md:py-8">{children}</main>
