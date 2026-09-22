@@ -2,9 +2,15 @@
  * Hand-written types for the Supabase tables, matching supabase/schema.sql.
  * Regenerate/replace with `supabase gen types typescript` once a real
  * project is linked, if preferred.
+ *
+ * These must be declared with `type`, not `interface`: this version of
+ * @supabase/postgrest-js resolves query results through deeply nested
+ * conditional types, and an `interface`-declared Row/Insert/Update/Database
+ * type breaks that resolution silently (every query collapses to `never`
+ * instead of erroring) even though the shapes are structurally identical.
  */
 
-export interface OpportunityRow {
+export type OpportunityRow = {
   id: string;
   opportunity_type: string;
   title: string;
@@ -39,25 +45,25 @@ export interface OpportunityRow {
   duplicate_fingerprint: string;
   created_at: string;
   updated_at: string;
-}
+};
 
 export type OpportunityInsert = Omit<OpportunityRow, "created_at" | "updated_at"> & {
   created_at?: string;
   updated_at?: string;
 };
 
-export interface OpportunitySourceRow {
+export type OpportunitySourceRow = {
   id: string;
   opportunity_id: string;
   source: string;
   source_id: string | null;
   source_url: string;
   discovered_at: string;
-}
+};
 
 export type OpportunitySourceInsert = Omit<OpportunitySourceRow, "id"> & { id?: string };
 
-export interface SourceRunRow {
+export type SourceRunRow = {
   id: string;
   source: string;
   status: "ok" | "error";
@@ -72,118 +78,85 @@ export interface SourceRunRow {
   duplicate_count: number;
   error_message: string | null;
   created_at: string;
-}
+};
 
 export type SourceRunInsert = Omit<SourceRunRow, "id" | "created_at"> & {
   id?: string;
   created_at?: string;
 };
 
+export type JobRow = {
+  id: string;
+  external_id: string;
+  source: string;
+  title: string;
+  company: string;
+  company_logo: string | null;
+  url: string;
+  description: string | null;
+  location: string | null;
+  salary_min: number | null;
+  salary_max: number | null;
+  salary_currency: string | null;
+  salary_period: string | null;
+  job_type: string | null;
+  category: string | null;
+  tags: string[] | null;
+  posted_at: string | null;
+  collected_at: string;
+  match_score: number | null;
+  is_worldwide: boolean;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type JobInsert = Omit<JobRow, "id" | "collected_at" | "created_at" | "updated_at"> & {
+  id?: string;
+  collected_at?: string;
+  created_at?: string;
+  updated_at?: string;
+};
+
 // supabase-js's generics (GenericTable / GenericSchema, from
 // @supabase/postgrest-js) require every table to carry `Relationships`
-// and every schema to carry `Views`/`Functions`, even when unused — omit
-// them and query results silently collapse to `never` instead of erroring
-// clearly. `[]`/`{}` are correct here: this schema has no foreign-key
-// relationships, views, or Postgres functions declared.
-type NoRelationships = { Relationships: [] };
+// and every schema to carry `Views`/`Functions`/`Enums`/`CompositeTypes`,
+// even when unused — omit them and query results silently collapse to
+// `never` instead of erroring clearly. `[]`/`{}` are correct here: this
+// schema has no foreign-key relationships, views, enums, or composite
+// types declared.
 
-export interface Database {
+export type Database = {
   public: {
     Tables: {
       opportunities: {
         Row: OpportunityRow;
         Insert: OpportunityInsert;
         Update: Partial<OpportunityInsert>;
-      } & NoRelationships;
+        Relationships: [];
+      };
       opportunity_sources: {
         Row: OpportunitySourceRow;
         Insert: OpportunitySourceInsert;
         Update: Partial<OpportunitySourceInsert>;
-      } & NoRelationships;
+        Relationships: [];
+      };
       source_runs: {
         Row: SourceRunRow;
         Insert: SourceRunInsert;
         Update: Partial<SourceRunInsert>;
-      } & NoRelationships;
+        Relationships: [];
+      };
       jobs: {
-        Row: {
-          id: string;
-          external_id: string;
-          source: string;
-          title: string;
-          company: string;
-          company_logo: string | null;
-          url: string;
-          description: string | null;
-          location: string | null;
-          salary_min: number | null;
-          salary_max: number | null;
-          salary_currency: string | null;
-          salary_period: string | null;
-          job_type: string | null;
-          category: string | null;
-          tags: string[] | null;
-          posted_at: string | null;
-          collected_at: string;
-          match_score: number | null;
-          is_worldwide: boolean;
-          is_active: boolean;
-          created_at: string;
-          updated_at: string;
-        };
-        Insert: {
-          id?: string;
-          external_id: string;
-          source: string;
-          title: string;
-          company: string;
-          company_logo?: string | null;
-          url: string;
-          description?: string | null;
-          location?: string | null;
-          salary_min?: number | null;
-          salary_max?: number | null;
-          salary_currency?: string | null;
-          salary_period?: string | null;
-          job_type?: string | null;
-          category?: string | null;
-          tags?: string[] | null;
-          posted_at?: string | null;
-          collected_at?: string;
-          match_score?: number | null;
-          is_worldwide?: boolean;
-          is_active?: boolean;
-          created_at?: string;
-          updated_at?: string;
-        };
-        Update: {
-          id?: string;
-          external_id?: string;
-          source?: string;
-          title?: string;
-          company?: string;
-          company_logo?: string | null;
-          url?: string;
-          description?: string | null;
-          location?: string | null;
-          salary_min?: number | null;
-          salary_max?: number | null;
-          salary_currency?: string | null;
-          salary_period?: string | null;
-          job_type?: string | null;
-          category?: string | null;
-          tags?: string[] | null;
-          posted_at?: string | null;
-          collected_at?: string;
-          match_score?: number | null;
-          is_worldwide?: boolean;
-          is_active?: boolean;
-          created_at?: string;
-          updated_at?: string;
-        };
-      } & NoRelationships;
+        Row: JobRow;
+        Insert: JobInsert;
+        Update: Partial<JobInsert>;
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
   };
-}
+};
