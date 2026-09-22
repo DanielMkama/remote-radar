@@ -4,6 +4,13 @@ import { listOpportunities } from "@/lib/opportunities/repository";
 import { getSupabaseServiceClient } from "@/lib/supabase/server";
 import type { Job } from "@/lib/jobs/types";
 
+// Without this, Next would statically prerender this page once at build
+// time (it has no dynamic route params/searchParams to force otherwise)
+// and every visitor would keep seeing that build's data forever — new
+// ingestion runs and jobs crossing the 30-day freshness cutoff would never
+// show up until the next deploy. Force a fresh Supabase read per request.
+export const dynamic = "force-dynamic";
+
 /**
  * Server component: tries Supabase first, falls back to mock data if
  * Supabase isn't configured, the query fails, or there simply aren't any

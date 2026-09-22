@@ -6,6 +6,7 @@ import { SummaryCards } from "./summary-cards";
 import { JobFiltersBar } from "./job-filters-bar";
 import { JobList } from "@/components/jobs/job-list";
 import { applyFilters, DEFAULT_FILTERS } from "@/lib/jobs/filters";
+import { usePreferences } from "@/context/preferences-context";
 import type { Job, JobFilters, SortOption } from "@/lib/jobs/types";
 
 interface DashboardViewProps {
@@ -14,13 +15,33 @@ interface DashboardViewProps {
   dataSource: "supabase" | "mock";
 }
 
-// Filters start from the target criteria (lib/jobs/filters.ts). Settings
-// (/settings) manages the same shape of preferences independently for
-// Phase 1; wiring them together is a natural later step once there's a
-// user account to persist the connection against.
+// Filters are derived from the user's saved Settings (/settings) on every
+// render — see `filters` below — until the user edits a filter directly on
+// the dashboard itself, at which point `overrides` takes over completely
+// (snapshotting the full filter set as it stood at that edit) so further
+// dashboard tweaks aren't fought by the live preferences value. Navigating
+// away and back remounts this component, clearing `overrides` and reseeding
+// from Settings again. Deriving at render time (rather than copying into
+// state inside an effect) also sidesteps SSR/hydration timing: preferences
+// come from localStorage, which isn't available on the server, so the first
+// correct client value only exists once `usePreferences()` has hydrated —
+// computing from it at render time always uses whatever's current.
 export function DashboardView({ initialJobs, dataSource }: DashboardViewProps) {
-  const [filters, setFilters] = useState<JobFilters>(DEFAULT_FILTERS);
+  const { preferences } = usePreferences();
+  const [overrides, setOverrides] = useState<JobFilters | null>(null);
   const [sort, setSort] = useState<SortOption>("newest");
+
+  const filters: JobFilters = useMemo(
+    () =>
+      overrides ?? {
+        ...DEFAULT_FILTERS,
+        categories: preferences.categories,
+        minMonthlySalary: preferences.minMonthlySalary,
+        maxMonthlySalary: preferences.maxMonthlySalary,
+        worldwideOnly: preferences.worldwideOnly,
+      },
+    [overrides, preferences]
+  );
 
   const results = useMemo(() => applyFilters(initialJobs, filters, sort), [initialJobs, filters, sort]);
 
@@ -50,7 +71,7 @@ export function DashboardView({ initialJobs, dataSource }: DashboardViewProps) {
         targetMax={filters.maxMonthlySalary ?? DEFAULT_FILTERS.maxMonthlySalary!}
       />
 
-      <JobFiltersBar filters={filters} onFiltersChange={setFilters} sort={sort} onSortChange={setSort} />
+      <JobFiltersBar filters={filters} onFiltersChange={setOverrides} sort={sort} onSortChange={setSort} />
 
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted-foreground">

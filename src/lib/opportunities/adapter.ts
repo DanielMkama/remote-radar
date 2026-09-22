@@ -7,6 +7,7 @@
 
 import { computeMatchScore } from "@/lib/jobs/filters";
 import type { Job, JobCategory, JobType } from "@/lib/jobs/types";
+import { classifyFreshness } from "./classify/freshness";
 import type { DesignCategory, EmploymentType, NormalizedOpportunity } from "./types";
 
 /**
@@ -45,6 +46,17 @@ export function opportunityToJob(o: NormalizedOpportunity): Job {
   const category = CATEGORY_TO_JOB_CATEGORY[o.category] ?? "other";
   const isWorldwide = o.locationStatus === "worldwide";
 
+  // Recomputed against the current time rather than trusting the persisted
+  // `freshness` column: that value is only as fresh as the last ingestion
+  // run, so without this, a listing would stay "active" on the dashboard
+  // past its 30-day cutoff (Phase 2 §22) until the next `npm run ingest`
+  // happened to touch that row again.
+  const freshness = classifyFreshness({
+    deadline: o.deadline,
+    postedAt: o.postedAt,
+    discoveredAt: o.discoveredAt,
+  });
+
   const salary = {
     min: o.salaryMin,
     max: o.salaryMax,
@@ -73,12 +85,12 @@ export function opportunityToJob(o: NormalizedOpportunity): Job {
     collectedAt: o.discoveredAt,
     matchScore: computeMatchScore({ isWorldwide, category, salary }),
     isWorldwide,
-    isActive: o.freshness === "active",
+    isActive: freshness === "active",
     createdAt: o.createdAt,
     updatedAt: o.updatedAt,
 
     verificationStatus: o.verificationStatus,
-    freshness: o.freshness,
+    freshness,
     isDirectApplication: o.verificationStatus === "verified",
   };
 }
