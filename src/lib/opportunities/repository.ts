@@ -104,7 +104,19 @@ function normalizedToRow(o: NormalizedOpportunity): OpportunityInsert {
   };
 }
 
-/** Fields compared to decide "updated" vs. untouched "duplicate" on re-ingestion. */
+/**
+ * Fields compared to decide "updated" vs. untouched "duplicate" on
+ * re-ingestion. Must include our OWN derived/classified fields
+ * (locationStatus, salaryStatus, category), not just the raw fields a
+ * source gives us — a classifier bug fix changes the derived value while
+ * the underlying source text (e.g. locationText: "EMEA") stays identical,
+ * so comparing only raw fields means the fix never gets picked up on
+ * re-ingestion: `changed` stays false, so upsertOpportunity's update
+ * branch never runs. Found via a real Phase 3B audit re-ingestion: after
+ * fixing a location-classifier bug, the pipeline's own run summary
+ * correctly reported the new worldwide count, but every affected row's
+ * `location_status` in Supabase stayed at its stale, pre-fix value.
+ */
 function hasMeaningfulChanges(existing: NormalizedOpportunity, incoming: NormalizedOpportunity): boolean {
   return (
     existing.title !== incoming.title ||
@@ -114,7 +126,10 @@ function hasMeaningfulChanges(existing: NormalizedOpportunity, incoming: Normali
     existing.locationText !== incoming.locationText ||
     existing.deadline !== incoming.deadline ||
     existing.employmentType !== incoming.employmentType ||
-    existing.freshness !== incoming.freshness
+    existing.freshness !== incoming.freshness ||
+    existing.locationStatus !== incoming.locationStatus ||
+    existing.salaryStatus !== incoming.salaryStatus ||
+    existing.category !== incoming.category
   );
 }
 

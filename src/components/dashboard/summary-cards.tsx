@@ -27,7 +27,7 @@ export function SummaryCards({ jobs, targetMin, targetMax }: SummaryCardsProps) 
     {
       label: "New Jobs",
       value: newJobsCount,
-      hint: "Posted in the last 7 days",
+      hint: "Last 7 days",
       icon: Inbox,
     },
     {
@@ -68,7 +68,7 @@ export function SummaryCards({ jobs, targetMin, targetMax }: SummaryCardsProps) 
               <p className="whitespace-nowrap text-base font-semibold tracking-tight tabular-nums sm:text-xl">
                 {value}
               </p>
-              <p className="truncate text-xs text-muted-foreground">{hint}</p>
+              <p className="whitespace-nowrap text-xs text-muted-foreground">{hint}</p>
             </div>
             <Icon className="size-4 shrink-0 text-muted-foreground" strokeWidth={1.75} />
           </CardContent>

@@ -135,23 +135,36 @@ export interface ClassifyLocationInput {
   extraText?: string | null;
 }
 
+/** Classifies one piece of text alone, or null if it contains no recognized signal. */
+function classifyText(text: string): LocationStatus | null {
+  if (!text) return null;
+  if (matchesAny(WORLDWIDE_PATTERNS, text)) return "worldwide";
+  if (matchesAny(TIMEZONE_PATTERNS, text)) return "timezone_restricted";
+  if (matchesAny(COUNTRY_NAMES, text) || matchesAny(COUNTRY_CODES, text)) return "country_restricted";
+  if (matchesAny(REGION_NAMES, text) || matchesAny(REGION_CODES, text)) return "region_restricted";
+  return null;
+}
+
 export function classifyLocation({ locationText, extraText }: ClassifyLocationInput): LocationStatus {
   const primary = (locationText ?? "").trim();
   const secondary = (extraText ?? "").trim();
+
+  // The structured location field is authoritative when it states
+  // anything recognizable on its own — a description's generic "global
+  // enterprise" / "compensation worldwide" / "top global brands"
+  // marketing language must not override an explicit "EMEA" / "LATAM" /
+  // "India" / "Remote - London Office" in the location field itself.
+  // Found via a real-data audit: multiple sources (Greenhouse, Lever,
+  // RemoteOK) had a specific location field that got overridden by
+  // unrelated worldwide-sounding language elsewhere in the description.
+  const fromPrimary = classifyText(primary);
+  if (fromPrimary) return fromPrimary;
+
+  // Primary alone was empty or genuinely uninformative (e.g. bare
+  // "Remote") — widen to the combined text, same as before, so a
+  // clarifying "we hire from anywhere in the world" in the description
+  // still counts when the location field itself said nothing specific.
   const combined = [primary, secondary].filter(Boolean).join(" | ");
-
   if (combined.length === 0) return "location_unclear";
-
-  if (matchesAny(WORLDWIDE_PATTERNS, combined)) return "worldwide";
-  if (matchesAny(TIMEZONE_PATTERNS, combined)) return "timezone_restricted";
-  if (matchesAny(COUNTRY_NAMES, combined) || matchesAny(COUNTRY_CODES, combined)) {
-    return "country_restricted";
-  }
-  if (matchesAny(REGION_NAMES, combined) || matchesAny(REGION_CODES, combined)) {
-    return "region_restricted";
-  }
-
-  // Bare "Remote" (or similar generic terms) with no further evidence:
-  // genuinely ambiguous, not assumed worldwide.
-  return "location_unclear";
+  return classifyText(combined) ?? "location_unclear";
 }

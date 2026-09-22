@@ -13,6 +13,7 @@ import { PLANNED_ATS_SOURCES } from "./ats/planned-ats";
 import { getOnBoardSource } from "./getonboard";
 import { himalayasSource } from "./himalayas";
 import { hiringCafeSource } from "./hiringcafe";
+import { intoDesignSystemsSource } from "./intodesignsystems";
 import { jobgetherSource } from "./jobgether";
 import { remoteOkSource } from "./remoteok";
 import { remotiveSource } from "./remotive";
@@ -61,6 +62,7 @@ export const SOURCE_REGISTRY: OpportunitySource[] = [
   // Phase 3A additions
   jobgetherSource,
   workingNomadsSource,
+  intoDesignSystemsSource,
   // Tier 3 — verified company boards, plus the generic architecture for
   // adding more. See lib/sources/ats/greenhouse.ts, lever.ts and ashby.ts.
   ...COMPANY_ATS_SOURCES,
