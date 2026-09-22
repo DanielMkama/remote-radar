@@ -11,11 +11,16 @@ import { JOB_CATEGORIES, type Job, type JobCategory, type JobFilters, type SortO
 /** All target design roles, used as the default category selection. */
 export const TARGET_CATEGORIES: JobCategory[] = JOB_CATEGORIES.map((c) => c.value);
 
+/** Employment types the product targets by default (no internships, no unspecified). */
+export const TARGET_EMPLOYMENT_TYPES: JobFilters["employmentTypes"] = ["full-time", "part-time"];
+
 /**
  * Default filter values, matching the target criteria this tool exists to
- * apply: worldwide design roles paying $500–$2,000/month. An empty
- * `categories` array means "no restriction"; the default starts scoped to
- * the target roles so irrelevant categories are excluded out of the box.
+ * apply: worldwide, full-time or part-time design roles paying
+ * $500–$2,000/month. An empty `categories` array means "no restriction";
+ * the default starts scoped to the target roles so irrelevant categories
+ * are excluded out of the box. `salaryDisclosure: "all"` keeps Phase 1
+ * behavior (jobs with no salary info aren't hidden) — see lib/jobs/types.ts.
  */
 export const DEFAULT_FILTERS: JobFilters = {
   search: "",
@@ -23,6 +28,8 @@ export const DEFAULT_FILTERS: JobFilters = {
   minMonthlySalary: 500,
   maxMonthlySalary: 2000,
   worldwideOnly: true,
+  employmentTypes: TARGET_EMPLOYMENT_TYPES,
+  salaryDisclosure: "all",
 };
 
 /**
@@ -50,8 +57,15 @@ export function jobMatchesFilters(job: Job, filters: JobFilters): boolean {
 
   if (filters.worldwideOnly && !job.isWorldwide) return false;
 
+  if (filters.employmentTypes && filters.employmentTypes.length > 0) {
+    if (!filters.employmentTypes.includes(job.jobType)) return false;
+  }
+
   const { min: jobMin, max: jobMax } = job.salary.normalizedMonthly;
   const hasSalaryData = jobMin != null || jobMax != null;
+
+  if (filters.salaryDisclosure === "disclosed" && !hasSalaryData) return false;
+  if (filters.salaryDisclosure === "undisclosed" && hasSalaryData) return false;
 
   if (hasSalaryData) {
     const effectiveMin = jobMin ?? jobMax!;

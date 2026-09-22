@@ -12,8 +12,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
-import { JOB_CATEGORIES, type JobCategory, type JobFilters, type SortOption } from "@/lib/jobs/types";
-import { TARGET_CATEGORIES } from "@/lib/jobs/filters";
+import {
+  JOB_CATEGORIES,
+  type JobCategory,
+  type JobFilters,
+  type JobType,
+  type SalaryDisclosure,
+  type SortOption,
+} from "@/lib/jobs/types";
+import { TARGET_CATEGORIES, TARGET_EMPLOYMENT_TYPES } from "@/lib/jobs/filters";
 
 interface JobFiltersBarProps {
   filters: JobFilters;
@@ -24,9 +31,25 @@ interface JobFiltersBarProps {
 
 const ALL_CATEGORIES_VALUE = "all";
 
+const EMPLOYMENT_TYPE_OPTIONS: { value: string; label: string; types: JobType[] }[] = [
+  { value: "full-part", label: "Full-time + Part-time", types: TARGET_EMPLOYMENT_TYPES ?? [] },
+  { value: "all", label: "All types", types: [] },
+  { value: "full-time", label: "Full-time only", types: ["full-time"] },
+  { value: "part-time", label: "Part-time only", types: ["part-time"] },
+  { value: "contract", label: "Contract only", types: ["contract"] },
+  { value: "freelance", label: "Freelance only", types: ["freelance"] },
+];
+
 export function JobFiltersBar({ filters, onFiltersChange, sort, onSortChange }: JobFiltersBarProps) {
   const selectedCategory: string =
     filters.categories && filters.categories.length === 1 ? filters.categories[0] : ALL_CATEGORIES_VALUE;
+
+  const selectedEmploymentOption =
+    EMPLOYMENT_TYPE_OPTIONS.find(
+      (opt) =>
+        opt.types.length === (filters.employmentTypes?.length ?? 0) &&
+        opt.types.every((t) => filters.employmentTypes?.includes(t))
+    )?.value ?? "all";
 
   const patch = (next: Partial<JobFilters>) => onFiltersChange({ ...filters, ...next });
 
@@ -110,6 +133,45 @@ export function JobFiltersBar({ filters, onFiltersChange, sort, onSortChange }: 
           <Label htmlFor="worldwide-only" className="cursor-pointer">
             Worldwide only
           </Label>
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="employment-type">Employment type</Label>
+          <Select
+            value={selectedEmploymentOption}
+            onValueChange={(value) => {
+              const option = EMPLOYMENT_TYPE_OPTIONS.find((opt) => opt.value === value);
+              patch({ employmentTypes: option?.types ?? [] });
+            }}
+          >
+            <SelectTrigger id="employment-type" className="w-full lg:w-52">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {EMPLOYMENT_TYPE_OPTIONS.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="salary-disclosure">Salary</Label>
+          <Select
+            value={filters.salaryDisclosure ?? "all"}
+            onValueChange={(value) => patch({ salaryDisclosure: value as SalaryDisclosure })}
+          >
+            <SelectTrigger id="salary-disclosure" className="w-full lg:w-40">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All</SelectItem>
+              <SelectItem value="disclosed">Salary disclosed</SelectItem>
+              <SelectItem value="undisclosed">Salary not disclosed</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         <div className="flex flex-col gap-1.5">

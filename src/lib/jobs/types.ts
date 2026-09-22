@@ -48,8 +48,22 @@ export type JobType =
   | "internship"
   | "unspecified";
 
-/** Job board / origin of a listing. Phase 1 only ships Remotive. */
-export type JobSource = "remotive";
+/**
+ * Job board / origin of a listing. Phase 1 only shipped "remotive"; Phase 2
+ * adds the sources actually implemented in lib/sources/. Kept as a plain
+ * string union (not reusing SourceId from lib/sources/types.ts) so this
+ * file has no dependency on the ingestion layer — mock data and the UI
+ * only need to know these are display strings.
+ */
+export type JobSource =
+  | "remotive"
+  | "himalayas"
+  | "remoteok"
+  | "weworkremotely"
+  | "wellfound"
+  | "getonboard"
+  | "greenhouse"
+  | "lever";
 
 /**
  * Salary exactly as the employer/source stated it, with a normalized
@@ -96,7 +110,23 @@ export interface Job {
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
+
+  // --- Phase 2 additions. All optional: mock jobs and any other existing
+  // Job producer don't need to set these, and existing UI code that
+  // doesn't read them is unaffected. Populated by
+  // lib/opportunities/adapter.ts from the richer Opportunity model. ---
+  /** How many distinct sources reported this same opportunity (see lib/opportunities/dedupe.ts). */
+  sourceCount?: number;
+  /** How confident we are this is a real, currently-open opportunity. */
+  verificationStatus?: "verified" | "likely" | "unverified";
+  /** Lifecycle state — see lib/opportunities/freshness.ts. */
+  freshness?: "active" | "expired" | "closed" | "unknown";
+  /** True when the application URL points at the company's own careers page/ATS. */
+  isDirectApplication?: boolean;
 }
+
+/** How a job's salary compares to the filter's target range. */
+export type SalaryDisclosure = "all" | "disclosed" | "undisclosed";
 
 /** Filter criteria applied to a job list. All fields optional/combinable. */
 export interface JobFilters {
@@ -105,6 +135,10 @@ export interface JobFilters {
   minMonthlySalary?: number;
   maxMonthlySalary?: number;
   worldwideOnly?: boolean;
+  /** Employment types to include. Undefined/empty means "any". */
+  employmentTypes?: JobType[];
+  /** Whether to require/exclude/ignore disclosed salary. Defaults to "all". */
+  salaryDisclosure?: SalaryDisclosure;
 }
 
 export type SortOption = "newest" | "salary-desc" | "salary-asc";

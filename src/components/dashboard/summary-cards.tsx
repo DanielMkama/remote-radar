@@ -44,7 +44,7 @@ export function SummaryCards({ jobs, targetMin, targetMax }: SummaryCardsProps) 
     },
     {
       label: "Salary Range",
-      value: `$${targetMin.toLocaleString()}–$${targetMax.toLocaleString()}`,
+      value: `$${targetMin.toLocaleString()}-$${targetMax.toLocaleString()}`,
       hint: "Target, per month",
       icon: Wallet,
     },
@@ -53,14 +53,14 @@ export function SummaryCards({ jobs, targetMin, targetMax }: SummaryCardsProps) 
   return (
     <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
       {cards.map(({ label, value, hint, icon: Icon }) => (
-        <Card key={label}>
-          <CardContent className="flex items-start justify-between">
-            <div>
-              <p className="text-xs font-medium text-muted-foreground">{label}</p>
-              <p className="mt-1.5 text-2xl font-semibold tracking-tight tabular-nums">{value}</p>
-              <p className="mt-0.5 text-xs text-muted-foreground">{hint}</p>
+        <Card key={label} className="h-full">
+          <CardContent className="flex h-full items-start justify-between gap-2">
+            <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+              <p className="truncate text-xs font-medium text-muted-foreground">{label}</p>
+              <p className="truncate text-xl font-semibold tracking-tight tabular-nums">{value}</p>
+              <p className="truncate text-xs text-muted-foreground">{hint}</p>
             </div>
-            <Icon className="size-4 text-muted-foreground" strokeWidth={1.75} />
+            <Icon className="size-4 shrink-0 text-muted-foreground" strokeWidth={1.75} />
           </CardContent>
         </Card>
       ))}

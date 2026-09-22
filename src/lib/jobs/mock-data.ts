@@ -86,7 +86,7 @@ const RAW_JOBS: RawMockJob[] = [
     companyLogo: null,
     url: "https://remotive.com/remote-jobs/design/ux-researcher-designer-1003",
     description:
-      "Wanderly is a travel-planning startup hiring a part-time UX Designer/Researcher. Work from anywhere — we're a fully distributed team spanning 12 countries.\n\nYou'll conduct user interviews, synthesize findings, and turn them into wireframes and prototypes.",
+      "Wanderly is a travel-planning startup hiring a part-time UX Designer/Researcher. Work from anywhere, we're a fully distributed team spanning 12 countries.\n\nYou'll conduct user interviews, synthesize findings, and turn them into wireframes and prototypes.",
     location: "Remote - Work From Anywhere",
     isWorldwide: true,
     salaryMin: 600,
@@ -181,7 +181,7 @@ const RAW_JOBS: RawMockJob[] = [
     companyLogo: null,
     url: "https://remotive.com/remote-jobs/design/web-designer-1008",
     description:
-      "Driftwood Collective is a freelance network building marketing sites for indie founders. Paid hourly, fully async, open globally — work from anywhere with a laptop and an internet connection.",
+      "Driftwood Collective is a freelance network building marketing sites for indie founders. Paid hourly, fully async, open globally, work from anywhere with a laptop and an internet connection.",
     location: "Global / Anywhere",
     isWorldwide: true,
     salaryMin: 9,

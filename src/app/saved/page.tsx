@@ -1,22 +1,46 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Bookmark } from "lucide-react";
 import { JobList } from "@/components/jobs/job-list";
 import { useSavedJobs } from "@/context/saved-jobs-context";
 import { MOCK_JOBS } from "@/lib/jobs/mock-data";
 import { sortJobs } from "@/lib/jobs/filters";
+import type { Job } from "@/lib/jobs/types";
 
 export default function SavedJobsPage() {
   const { savedIds } = useSavedJobs();
+  const [remoteJobs, setRemoteJobs] = useState<Job[]>([]);
+
+  // Saved job ids can point at either real (Supabase) opportunities or
+  // mock fixtures (if they were saved before Supabase was configured).
+  // Fetch the real list client-side and merge both pools below so a
+  // saved id resolves either way; an API error just means we fall back
+  // to mock-only, which still resolves any mock-sourced saves.
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/opportunities")
+      .then((res) => (res.ok ? res.json() : { jobs: [] }))
+      .then((data) => {
+        if (!cancelled) setRemoteJobs(data.jobs ?? []);
+      })
+      .catch(() => {
+        if (!cancelled) setRemoteJobs([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const savedJobs = useMemo(() => {
     const savedSet = new Set(savedIds);
+    const pool = new Map<string, Job>();
+    for (const job of [...MOCK_JOBS, ...remoteJobs]) pool.set(job.id, job);
     return sortJobs(
-      MOCK_JOBS.filter((job) => savedSet.has(job.id)),
+      Array.from(pool.values()).filter((job) => savedSet.has(job.id)),
       "newest"
     );
-  }, [savedIds]);
+  }, [savedIds, remoteJobs]);
 
   return (
     <div className="flex flex-col gap-6">

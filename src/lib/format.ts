@@ -57,6 +57,13 @@ export function formatCategory(category: string): string {
 
 const SOURCE_LABELS: Record<string, string> = {
   remotive: "Remotive",
+  himalayas: "Himalayas",
+  remoteok: "Remote OK",
+  weworkremotely: "We Work Remotely",
+  wellfound: "Wellfound",
+  getonboard: "Get on Board",
+  greenhouse: "Greenhouse",
+  lever: "Lever",
 };
 
 export function formatSource(source: string): string {
