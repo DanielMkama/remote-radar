@@ -8,15 +8,18 @@
 import { createAshbySource } from "./ats/ashby";
 import { createGreenhouseSource } from "./ats/greenhouse";
 import { createLeverSource } from "./ats/lever";
+import { createWorkableSource } from "./ats/workable";
 import { PLANNED_ATS_SOURCES } from "./ats/planned-ats";
 import { getOnBoardSource } from "./getonboard";
 import { himalayasSource } from "./himalayas";
 import { hiringCafeSource } from "./hiringcafe";
+import { jobgetherSource } from "./jobgether";
 import { remoteOkSource } from "./remoteok";
 import { remotiveSource } from "./remotive";
 import type { OpportunitySource } from "./types";
 import { weWorkRemotelySource } from "./weworkremotely";
 import { wellfoundSource } from "./wellfound";
+import { workingNomadsSource } from "./workingnomads";
 
 // Tier 3 company boards. Each of these was verified live (a real 200
 // response with actual job data, not just a guessed slug) before being
@@ -28,9 +31,21 @@ const COMPANY_ATS_SOURCES: OpportunitySource[] = [
   createGreenhouseSource("remotecom", "Remote.com"),
   createGreenhouseSource("wikimedia", "Wikimedia Foundation"),
   createGreenhouseSource("moniepoint", "Moniepoint"),
+  createGreenhouseSource("smartsheet", "Smartsheet"),
+  createGreenhouseSource("ezcaterinc", "ezCater"),
   createLeverSource("superside", "Superside"),
+  createLeverSource("luxurypresence", "Luxury Presence"),
   createAshbySource("flipper", "Flipper Devices"),
   createAshbySource("duck-duck-go", "DuckDuckGo"),
+  createAshbySource("httpie", "HTTPie"),
+  createAshbySource("Aios", "AIOS Medical"),
+  createAshbySource("ashby", "Ashby"),
+  createAshbySource("runway-ml", "Runway"),
+  createWorkableSource("hospitable", "Hospitable.com"),
+  createWorkableSource("pavago", "Pavago"),
+  createWorkableSource("renewhome", "Renew Home"),
+  createWorkableSource("wearewqa", "WQA"),
+  createWorkableSource("facetwealth", "Facet"),
 ];
 
 export const SOURCE_REGISTRY: OpportunitySource[] = [
@@ -43,6 +58,9 @@ export const SOURCE_REGISTRY: OpportunitySource[] = [
   remoteOkSource,
   weWorkRemotelySource,
   hiringCafeSource, // planned
+  // Phase 3A additions
+  jobgetherSource,
+  workingNomadsSource,
   // Tier 3 — verified company boards, plus the generic architecture for
   // adding more. See lib/sources/ats/greenhouse.ts, lever.ts and ashby.ts.
   ...COMPANY_ATS_SOURCES,

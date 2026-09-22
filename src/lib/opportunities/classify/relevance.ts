@@ -21,6 +21,7 @@ const ROLE_PATTERNS: RegExp[] = [
   /\bcreative designers?\b/i,
   /\bart directors?\b/i,
   /\bcreative directors?\b/i,
+  /\bhead of design\b/i,
   /\bdigital designers?\b/i,
   /\bcommunication designers?\b/i,
   /\bpresentation designers?\b/i,

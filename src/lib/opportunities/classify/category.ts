@@ -17,7 +17,7 @@ import type { DesignCategory } from "../types";
 const CATEGORY_PATTERNS: Array<{ category: DesignCategory; pattern: RegExp }> = [
   { category: "brand_design", pattern: /\bbrand(?:ing)?\b/i },
   { category: "motion_design", pattern: /\bmotion\b|\banimat(?:or|ion)\b/i },
-  { category: "creative_direction", pattern: /\bcreative direct(?:or|ion)\b|\bhead of creative\b/i },
+  { category: "creative_direction", pattern: /\bcreative direct(?:or|ion)\b|\bhead of creative\b|\bhead of design\b/i },
   { category: "art_direction", pattern: /\bart direct(?:or|ion)\b/i },
   { category: "illustration", pattern: /\billustrat(?:or|ion)\b/i },
   { category: "presentation_design", pattern: /\bpresentation designers?\b|\bdeck designers?\b/i },

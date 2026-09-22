@@ -27,12 +27,13 @@ function plannedAtsSource(id: string, name: string, note: string): OpportunitySo
 }
 
 export const PLANNED_ATS_SOURCES: OpportunitySource[] = [
-  plannedAtsSource("ashby", "Ashby", "Has a public API per-company; no adapter implemented yet."),
-  plannedAtsSource("workable", "Workable", "Has a public API per-company; no adapter implemented yet."),
   plannedAtsSource(
     "smartrecruiters",
     "SmartRecruiters",
-    "Has a public API per-company; no adapter implemented yet."
+    "Public postings API exists (api.smartrecruiters.com/v1/companies/{id}/postings, verified working) " +
+      "but its robots.txt disallows everything for all user agents except an explicit LinkedInBot allowance " +
+      "(`User-agent: * / Disallow: /`) — not accessible to us under the same rule that keeps this project off " +
+      "Wellfound's disallowed endpoints. Revisit only if SmartRecruiters opens general bot access."
   ),
   plannedAtsSource("teamtailor", "Teamtailor", "Has a public API per-company; no adapter implemented yet."),
   plannedAtsSource("recruitee", "Recruitee", "Has a public API per-company; no adapter implemented yet."),

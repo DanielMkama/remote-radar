@@ -27,8 +27,7 @@ export default async function SourcesAdminPage() {
           <h1 className="text-2xl font-semibold tracking-tight">Sources</h1>
         </div>
         <p className="mt-1 text-sm text-muted-foreground">
-          Ingestion status per source. Run <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">npm run ingest</code> to
-          refresh.
+          Where Remote Design Radar&apos;s opportunities come from, and how each source is doing.
         </p>
       </div>
 
