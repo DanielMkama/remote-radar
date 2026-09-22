@@ -56,9 +56,16 @@ export function createAshbySource(boardName: string, companyName: string): Oppor
       const data = await fetchJson<AshbyBoardResponse>(endpoint, { signal: ctx.signal });
 
       return data.jobs.map((job): RawOpportunity => {
+        // job.location is often already "Remote" or "Remote - US" on its
+        // own (not just a bare city/country) — prefixing unconditionally
+        // produced "Remote — Remote - US". Only add the prefix when the
+        // location doesn't already say so.
+        const alreadySaysRemote = /^remote\b/i.test(job.location ?? "");
         const locationText = job.isRemote
           ? job.location
-            ? `Remote — ${job.location}`
+            ? alreadySaysRemote
+              ? job.location
+              : `Remote — ${job.location}`
             : "Remote"
           : job.location ?? null;
 

@@ -3,7 +3,6 @@
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import {
   Select,
   SelectContent,
@@ -55,7 +54,7 @@ export function JobFiltersBar({ filters, onFiltersChange, sort, onSortChange }: 
 
   return (
     <Card>
-      <CardContent className="flex flex-col gap-3 lg:flex-row lg:flex-wrap lg:items-end">
+      <CardContent className="flex flex-col gap-4 lg:flex-row lg:flex-wrap lg:items-end lg:gap-x-5 lg:gap-y-4">
         <div className="flex flex-1 flex-col gap-1.5 lg:min-w-[220px]">
           <Label htmlFor="job-search">Search</Label>
           <div className="relative">
@@ -122,17 +121,6 @@ export function JobFiltersBar({ filters, onFiltersChange, sort, onSortChange }: 
               patch({ maxMonthlySalary: e.target.value === "" ? undefined : Number(e.target.value) })
             }
           />
-        </div>
-
-        <div className="flex items-center gap-2 py-1.5">
-          <Switch
-            id="worldwide-only"
-            checked={filters.worldwideOnly ?? false}
-            onCheckedChange={(checked) => patch({ worldwideOnly: checked })}
-          />
-          <Label htmlFor="worldwide-only" className="cursor-pointer">
-            Worldwide only
-          </Label>
         </div>
 
         <div className="flex flex-col gap-1.5">

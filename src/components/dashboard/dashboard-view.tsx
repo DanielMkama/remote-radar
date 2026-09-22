@@ -5,6 +5,8 @@ import { Info } from "lucide-react";
 import { SummaryCards } from "./summary-cards";
 import { JobFiltersBar } from "./job-filters-bar";
 import { JobList } from "@/components/jobs/job-list";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { applyFilters, DEFAULT_FILTERS } from "@/lib/jobs/filters";
 import { usePreferences } from "@/context/preferences-context";
 import type { Job, JobFilters, SortOption } from "@/lib/jobs/types";
@@ -73,10 +75,20 @@ export function DashboardView({ initialJobs, dataSource }: DashboardViewProps) {
 
       <JobFiltersBar filters={filters} onFiltersChange={setOverrides} sort={sort} onSortChange={setSort} />
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-3">
         <p className="text-sm text-muted-foreground">
           {results.length} job{results.length === 1 ? "" : "s"} found
         </p>
+        <div className="flex items-center gap-2">
+          <Switch
+            id="worldwide-only"
+            checked={filters.worldwideOnly ?? false}
+            onCheckedChange={(checked) => setOverrides({ ...filters, worldwideOnly: checked })}
+          />
+          <Label htmlFor="worldwide-only" className="cursor-pointer text-sm text-muted-foreground">
+            Worldwide only
+          </Label>
+        </div>
       </div>
 
       <JobList jobs={results} />

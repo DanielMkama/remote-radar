@@ -50,6 +50,17 @@ const SOURCE_KIND_PRIORITY: Record<SourceKind, number> = {
  * union of tags, and keeps whichever description/deadline is present.
  * Never drops the incoming source's URL — the pipeline records it
  * separately in `opportunity_sources` regardless of this merge result.
+ *
+ * incoming always wins when it's a re-fetch of the SAME origin source as
+ * the existing row (existing.source === incoming.source) — that's not a
+ * competing duplicate, it's just the latest read of the same fact (the
+ * employer edited the listing, or a parser fix changed how we read it),
+ * and treating it as a tie via strict `>` priority comparison silently
+ * discarded every field this function doesn't explicitly special-case
+ * (title, locationText, salary, employmentType, freshness, ...) on every
+ * same-source re-ingestion — found via a real ingestion run where a
+ * source-adapter fix never showed up in Supabase despite the run
+ * reporting the row as "updated".
  */
 export function mergeDuplicate(
   existing: NormalizedOpportunity,
@@ -57,7 +68,9 @@ export function mergeDuplicate(
   existingSourceKind: SourceKind,
   incomingSourceKind: SourceKind
 ): NormalizedOpportunity {
-  const incomingWins = SOURCE_KIND_PRIORITY[incomingSourceKind] > SOURCE_KIND_PRIORITY[existingSourceKind];
+  const incomingWins =
+    existing.source === incoming.source ||
+    SOURCE_KIND_PRIORITY[incomingSourceKind] > SOURCE_KIND_PRIORITY[existingSourceKind];
 
   const primary = incomingWins ? incoming : existing;
   const secondary = incomingWins ? existing : incoming;

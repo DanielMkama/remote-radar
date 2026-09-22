@@ -84,4 +84,33 @@ describe("mergeDuplicate", () => {
 
     expect(merged.source).toBe("remotive");
   });
+
+  it("lets a same-source re-fetch update fields even at equal kind priority", () => {
+    // Regression: a source re-ingesting its own previously-seen listing
+    // (same `source`, e.g. a parser fix changed how locationText/title
+    // are read, or the employer edited the posting) must win outright.
+    // Strict `>` priority comparison treated this as a tie and kept the
+    // stale existing data for every field this function doesn't
+    // explicitly special-case, which meant re-ingestion could report a
+    // row as "updated" while Supabase never actually changed it.
+    const existing = makeOpportunity({
+      id: "existing-id",
+      source: "workable:acme",
+      title: "Product Designer",
+      locationText: "Remote - Remote, Oregon, United States",
+      salaryMin: null,
+    });
+    const incoming = makeOpportunity({
+      id: "incoming-id",
+      source: "workable:acme",
+      title: "Product Designer",
+      locationText: "Remote - Oregon, United States",
+      salaryMin: 4000,
+    });
+
+    const merged = mergeDuplicate(existing, incoming, "company_ats", "company_ats");
+
+    expect(merged.locationText).toBe("Remote - Oregon, United States");
+    expect(merged.salaryMin).toBe(4000);
+  });
 });
