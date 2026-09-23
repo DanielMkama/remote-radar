@@ -69,3 +69,15 @@ const SOURCE_LABELS: Record<string, string> = {
 export function formatSource(source: string): string {
   return SOURCE_LABELS[source] ?? source;
 }
+
+/**
+ * Every listing on this board is a remote job by construction (only remote
+ * postings get ingested) — but a source's raw location text is often just
+ * a residency/timezone restriction (e.g. "Seattle, USA"), which on its own
+ * reads like an on-site role. Prefix with "Remote" unless the text already
+ * says so (or "Worldwide", which gets its own badge).
+ */
+export function formatLocation(location: string): string {
+  if (/\b(remote|worldwide|anywhere)\b/i.test(location)) return location;
+  return `Remote - ${location}`;
+}

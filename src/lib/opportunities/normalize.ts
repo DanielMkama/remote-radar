@@ -14,6 +14,7 @@ import { classifySalaryStatus } from "./classify/salary-status";
 import { classifyVerification } from "./classify/verification";
 import { buildDuplicateFingerprint } from "./dedupe";
 import { stripEmDashes } from "./html-to-text";
+import { parseSalaryText } from "./parse-salary-text";
 import type { NormalizedOpportunity, OpportunityType, RawOpportunity, SourceKind } from "./types";
 
 export interface NormalizeContext {
@@ -25,11 +26,20 @@ export function normalizeOpportunity(raw: RawOpportunity, ctx: NormalizeContext)
   const now = ctx.now ?? new Date();
   const discoveredAt = now.toISOString();
 
+  // Some sources have no structured salary field at all (their adapters
+  // pass salaryMin/Max as null unconditionally) even though the posting's
+  // own description often states a figure. Falling back to the same
+  // conservative parseSalaryText() used for free-text salary fields still
+  // honors Phase 2 §8 ("never invent a salary") — it only ever surfaces a
+  // figure the posting explicitly states, just from a different field.
+  const descriptionFallback =
+    raw.salaryMin == null && raw.salaryMax == null ? parseSalaryText(raw.description) : null;
+
   const salary = buildSalaryInfo({
-    min: raw.salaryMin,
-    max: raw.salaryMax,
-    currency: raw.salaryCurrency ?? "USD",
-    period: raw.salaryPeriod,
+    min: raw.salaryMin ?? descriptionFallback?.min ?? null,
+    max: raw.salaryMax ?? descriptionFallback?.max ?? null,
+    currency: raw.salaryCurrency ?? descriptionFallback?.currency ?? "USD",
+    period: raw.salaryPeriod ?? descriptionFallback?.period ?? null,
   });
 
   const locationStatus = classifyLocation({

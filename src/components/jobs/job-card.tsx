@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { MatchScoreBadge } from "./match-score-badge";
 import { SaveButton } from "./save-button";
 import { formatSalary } from "@/lib/jobs/salary";
-import { formatCategory, formatRelativeDate, formatSource } from "@/lib/format";
+import { formatCategory, formatLocation, formatRelativeDate, formatSource } from "@/lib/format";
 import type { Job } from "@/lib/jobs/types";
 
 export function JobCard({ job }: { job: Job }) {
@@ -34,7 +34,7 @@ export function JobCard({ job }: { job: Job }) {
               {formatCategory(job.category)}
             </Badge>
             <span className="inline-flex items-center gap-1">
-              <MapPin className="size-3.5" /> {job.location}
+              <MapPin className="size-3.5" /> {formatLocation(job.location)}
             </span>
             <span className="inline-flex items-center gap-1">
               <Clock className="size-3.5" /> {formatRelativeDate(job.postedAt)}

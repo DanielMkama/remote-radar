@@ -62,6 +62,21 @@ describe("validateOpportunity", () => {
     expect(result.reasons.join(" ")).toMatch(/unpaid/);
   });
 
+  it("rejects senior roles requiring 5+ years of experience", () => {
+    const result = validateOpportunity(
+      makeOpportunity({ description: "You'll need 5 to 10 years of experience leading design teams." })
+    );
+    expect(result.valid).toBe(false);
+    expect(result.reasons.join(" ")).toMatch(/senior/);
+  });
+
+  it("accepts a 'Senior'-titled role whose stated requirement is below the threshold", () => {
+    const result = validateOpportunity(
+      makeOpportunity({ description: "You'll need 4+ years of experience leading design teams." })
+    );
+    expect(result.valid).toBe(true);
+  });
+
   it("rejects titles that aren't design-relevant", () => {
     const result = validateOpportunity(
       makeOpportunity({ title: "Senior .NET Software Engineer", duplicateFingerprint: "acme inc::senior net software engineer" })

@@ -7,6 +7,7 @@
  * intentionally does NOT reject here.
  */
 
+import { requiresSeniorExperience } from "./classify/experience";
 import { isDesignRelevant } from "./classify/relevance";
 import type { NormalizedOpportunity } from "./types";
 
@@ -32,6 +33,10 @@ export function validateOpportunity(o: NormalizedOpportunity): ValidationResult 
 
   if (UNPAID_PATTERN.test(`${o.title} ${o.salaryText ?? ""} ${o.description}`)) {
     reasons.push("unpaid/volunteer role (excluded by product rules)");
+  }
+
+  if (requiresSeniorExperience(`${o.title} ${o.description}`)) {
+    reasons.push("requires 5+ years of experience (senior roles excluded by product rules)");
   }
 
   return { valid: reasons.length === 0, reasons };

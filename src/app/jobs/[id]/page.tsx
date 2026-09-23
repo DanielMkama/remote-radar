@@ -14,6 +14,7 @@ import { formatSalary, formatNormalizedMonthly } from "@/lib/jobs/salary";
 import {
   formatCategory,
   formatJobType,
+  formatLocation,
   formatRelativeDate,
   formatAbsoluteDate,
   formatSource,
@@ -73,7 +74,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
 
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
           <span className="inline-flex items-center gap-1.5">
-            <MapPin className="size-4" /> {job.location}
+            <MapPin className="size-4" /> {formatLocation(job.location)}
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Briefcase className="size-4" /> {formatJobType(job.jobType)}
