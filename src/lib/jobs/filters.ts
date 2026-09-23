@@ -6,6 +6,7 @@
  * without changing this module's API.
  */
 
+import { requiresSeniorExperience } from "@/lib/opportunities/classify/experience";
 import { JOB_CATEGORIES, type Job, type JobCategory, type JobFilters, type SortOption } from "./types";
 
 /** All target design roles, used as the default category selection. */
@@ -44,6 +45,12 @@ export const DEFAULT_FILTERS: JobFilters = {
  */
 export function jobMatchesFilters(job: Job, filters: JobFilters): boolean {
   if (!job.isActive) return false;
+
+  // Product rule (see lib/opportunities/classify/experience.ts): senior
+  // roles requiring 4+ years of experience are excluded from the board.
+  // Checked here (not just at ingestion) so it also applies to
+  // opportunities that were already stored before this rule existed.
+  if (requiresSeniorExperience(`${job.title} ${job.description}`)) return false;
 
   if (filters.search && filters.search.trim().length > 0) {
     const q = filters.search.trim().toLowerCase();

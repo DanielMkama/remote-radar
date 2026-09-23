@@ -9,6 +9,7 @@ describe("requiresSeniorExperience", () => {
   it("flags a dash range and a plus form", () => {
     expect(requiresSeniorExperience("7-9 years of experience")).toBe(true);
     expect(requiresSeniorExperience("5+ years of experience")).toBe(true);
+    expect(requiresSeniorExperience("4+ years of experience")).toBe(true);
   });
 
   it("allows filler words between 'years' and 'experience'", () => {
@@ -16,7 +17,7 @@ describe("requiresSeniorExperience", () => {
   });
 
   it("does not flag junior-level requirements below the threshold", () => {
-    expect(requiresSeniorExperience("4+ years of UI design experience")).toBe(false);
+    expect(requiresSeniorExperience("3+ years of UI design experience")).toBe(false);
     expect(requiresSeniorExperience("2-3 years of experience")).toBe(false);
   });
 

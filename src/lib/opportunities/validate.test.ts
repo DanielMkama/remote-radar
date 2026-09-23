@@ -72,7 +72,7 @@ describe("validateOpportunity", () => {
 
   it("accepts a 'Senior'-titled role whose stated requirement is below the threshold", () => {
     const result = validateOpportunity(
-      makeOpportunity({ description: "You'll need 4+ years of experience leading design teams." })
+      makeOpportunity({ description: "You'll need 3+ years of experience leading design teams." })
     );
     expect(result.valid).toBe(true);
   });

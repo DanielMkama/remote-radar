@@ -1,6 +1,6 @@
 /**
  * Years-of-experience filter. Product rule: exclude senior-level roles that
- * spell out a required years-of-experience of 5 or more (e.g. "5+ years of
+ * spell out a required years-of-experience of 4 or more (e.g. "4+ years of
  * experience", "5-10 years experience", "5 to 10 years of experience").
  *
  * Deliberately narrow: only "<number> ... years ... experience" phrasing
@@ -17,7 +17,7 @@
 const YEARS_EXPERIENCE_PATTERN =
   /\b(\d{1,2})\+?\s*(?:(?:-|–|—|to)\s*\d{1,2})?\+?\s*years?\s*(?:of\s+)?(?:\w+\s+){0,2}experience\b/gi;
 
-const SENIOR_YEARS_THRESHOLD = 5;
+const SENIOR_YEARS_THRESHOLD = 4;
 
 /** Lowest stated years-of-experience requirement found in `text`, or null if none. */
 export function minYearsExperienceRequired(text: string | null | undefined): number | null {
