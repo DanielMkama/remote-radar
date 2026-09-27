@@ -1408,4 +1408,18 @@ export const CURATED_GRANTS_BATCH_2: RawGrant[] = [
     windowText: "Deadline: March 2, 2026",
     sourceItemId: "child-centred-design-fellowship-for-africa",
   },
+  {
+    title: "Outreachy",
+    organization: "Outreachy",
+    url: "https://www.outreachy.org/",
+    applicationUrl: "https://www.outreachy.org/apply/",
+    category: "tech_nonprofit_tech",
+    focusText:
+      "Paid, remote open source internship program supporting people from groups underrepresented in tech, working with mentors on real free/open-source software projects.",
+    eligibilityText:
+      "Open to applicants worldwide, including Tanzania. Must be 18+ by the internship start date, not a past Outreachy/OPW/GSoC intern, and free of conflicting full-time jobs or coursework during the program; students need 42 consecutive school-free days.",
+    amountText: "Paid internship plus travel stipend (amount not published on this page)",
+    windowText: null,
+    sourceItemId: "outreachy",
+  },
 ];
