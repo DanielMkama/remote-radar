@@ -8,6 +8,7 @@ const CATEGORY_LABELS: Record<GrantCategory, string> = {
   arts_film_media: "Arts – Film/Media",
   arts_theater_performance: "Arts – Theater/Performance",
   arts_multidisciplinary: "Arts – Multidisciplinary",
+  arts_residencies: "Arts – Residencies & Mobility",
   business_creative_entrepreneur: "Creative Entrepreneur / Business",
   tech_nonprofit_tech: "Tech / Nonprofit Tech",
   community_civic: "Community & Civic",

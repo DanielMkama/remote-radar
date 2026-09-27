@@ -250,7 +250,7 @@ create table if not exists grants (
   category          text not null default 'other'
                        check (category in (
                          'arts_music', 'arts_visual_photography', 'arts_film_media',
-                         'arts_theater_performance', 'arts_multidisciplinary',
+                         'arts_theater_performance', 'arts_multidisciplinary', 'arts_residencies',
                          'business_creative_entrepreneur', 'tech_nonprofit_tech',
                          'community_civic', 'other'
                        )),

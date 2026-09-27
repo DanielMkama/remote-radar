@@ -8,6 +8,7 @@
  */
 
 import { classifyGrantStatus } from "./classify-status";
+import { buildGrantFingerprint, buildGrantId } from "./dedupe";
 import { parseGrantAmount } from "./parse-amount";
 import { parseGrantWindow } from "./parse-window";
 import type { RawGrant } from "./source-types";
@@ -29,8 +30,10 @@ export function normalizeGrant(raw: RawGrant, ctx: NormalizeGrantContext): Grant
 
   const status = classifyGrantStatus({ opensAt, deadline, isRolling, now });
 
+  const fingerprint = buildGrantFingerprint(raw.organization, raw.title);
+
   return {
-    id: crypto.randomUUID(),
+    id: buildGrantId(fingerprint),
     title: raw.title.trim(),
     organization: raw.organization.trim(),
     organizationUrl: raw.organizationUrl ?? null,

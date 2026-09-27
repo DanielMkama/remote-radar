@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, CalendarClock, ExternalLink, Landmark, Link2, Tags } from "lucide-react";
+import { ArrowLeft, CalendarClock, CheckCircle2, ExternalLink, Landmark, Link2, Tags } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,6 +9,7 @@ import { getFallbackGrants } from "@/lib/grants/fallback";
 import { getGrantById } from "@/lib/grants/repository";
 import { getSupabaseServiceClient } from "@/lib/supabase/server";
 import { formatGrantAmount, formatGrantCategory, formatGrantDeadline, formatGrantStatus } from "@/lib/grants/format";
+import { getApplicationGuidance } from "@/lib/grants/guidance";
 import type { Grant } from "@/lib/grants/types";
 
 // Pre-renders the curated dataset's pages at build time; real (Supabase)
@@ -35,6 +36,8 @@ export default async function GrantDetailPage({ params }: { params: Promise<{ id
   const grant = await findGrant(id);
 
   if (!grant) notFound();
+
+  const guidance = getApplicationGuidance(grant);
 
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-6">
@@ -89,6 +92,19 @@ export default async function GrantDetailPage({ params }: { params: Promise<{ id
       </Card>
 
       <Separator />
+
+      <div>
+        <h2 className="text-sm font-semibold">{guidance.heading}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-foreground/90">{guidance.intro}</p>
+        <ul className="mt-3 flex flex-col gap-2">
+          {guidance.checklist.map((item) => (
+            <li key={item} className="flex items-start gap-2 text-sm leading-relaxed text-foreground/90">
+              <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {grant.eligibilityText && (
         <div>
