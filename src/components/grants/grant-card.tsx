@@ -33,19 +33,21 @@ export function GrantCard({ grant }: { grant: Grant }) {
             <Badge variant="secondary" className="font-normal">
               {formatGrantCategory(grant.category)}
             </Badge>
-            <span className="inline-flex items-center gap-1">
-              <CalendarClock className="size-3.5" /> {formatGrantDeadline(grant)}
+            <span className="inline-flex min-w-0 max-w-full items-center gap-1">
+              <CalendarClock className="size-3.5 shrink-0" />
+              <span className="line-clamp-1">{formatGrantDeadline(grant)}</span>
             </span>
             {grant.eligibilityText && (
-              <span className="inline-flex items-center gap-1">
-                <Landmark className="size-3.5" /> {grant.eligibilityText}
+              <span className="inline-flex min-w-0 max-w-full items-center gap-1">
+                <Landmark className="size-3.5 shrink-0" />
+                <span className="line-clamp-1">{grant.eligibilityText}</span>
               </span>
             )}
           </div>
         </div>
 
-        <div className="flex shrink-0 flex-row items-center justify-between gap-3 sm:flex-col sm:items-end">
-          <p className="text-sm font-semibold tabular-nums">{formatGrantAmount(grant.amount)}</p>
+        <div className="flex min-w-0 flex-row items-center justify-between gap-3 sm:w-48 sm:shrink-0 sm:flex-col sm:items-end">
+          <p className="break-words text-right text-sm font-semibold tabular-nums">{formatGrantAmount(grant.amount)}</p>
           <Button size="sm" render={<Link href={`/grants/${grant.id}`} />}>
             View details
           </Button>

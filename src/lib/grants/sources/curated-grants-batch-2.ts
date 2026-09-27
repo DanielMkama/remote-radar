@@ -1154,8 +1154,7 @@ export const CURATED_GRANTS_BATCH_2: RawGrant[] = [
       "Residential fellowships for dedicated research/creative time: Individual and Team Fellowships (any discipline, any career stage, worldwide), Iso Lomso Fellowship (early-to-mid-career African researchers), and Artist-in-Residence (any discipline, no geographic restriction).",
     eligibilityText:
       "Individual, Team and Artist-in-Residence fellowships have no country-of-origin restriction. Iso Lomso is restricted to African nationals or those affiliated with African institutions (Tanzania qualifies), doctorate earned within the preceding 8 years, applicant under age 42.",
-    amountText:
-      "Iso Lomso: economy airfare, accommodation, monthly stipend, office space, library access, childcare subsidies, conference/residency support. Other tracks: stipend details vary, contact STIAS.",
+    amountText: "Stipend + benefits (Iso Lomso); other tracks vary, see focus/eligibility notes",
     windowText:
       "Individual/Team/Artist-in-Residence: deadline October 31, 2026 (for 2028 1st semester). Iso Lomso: next call opens October 15, 2026, deadline February 15, 2027.",
     sourceItemId: "stias-fellowships",
@@ -1171,8 +1170,7 @@ export const CURATED_GRANTS_BATCH_2: RawGrant[] = [
     eligibilityText:
       "Remote-first program open worldwide to applicants already authorized to work in their own country of residence (no visa sponsorship or relocation required). Engineering track requires age 18+; design track considered case-by-case from age 14+. Applicants must show proof of building (code, prototypes, design work, or creative projects).",
     amountText: "Fully paid, 6-month program with benefits and equipment provided",
-    windowText:
-      "Applications currently closed for both the design and engineering tracks; sign up on the program page for notice of the next cycle.",
+    windowText: "Closed for both tracks; sign up on the program page for the next cycle",
     sourceItemId: "block-builder-fellowship",
   },
   {
@@ -1270,7 +1268,7 @@ export const CURATED_GRANTS_BATCH_2: RawGrant[] = [
     eligibilityText:
       "Open to undergraduate students across Africa, including Tanzania; no prior experience required. Includes financial support (e.g. internet support) to reduce participation barriers.",
     amountText: null,
-    windowText: "Applications closed for the current cohort; contact john@intellect.africa for the next cohort's dates",
+    windowText: "Closed; next cohort not yet announced",
     sourceItemId: "intellect-africa-summer-fellowship",
   },
   {
@@ -1335,8 +1333,7 @@ export const CURATED_GRANTS_BATCH_2: RawGrant[] = [
       "Fully funded master's study at UK universities for candidates from low- and middle-income Commonwealth countries, targeting the CSC's sustainable-development themes.",
     eligibilityText:
       "Open to citizens (or refugees) of eligible Commonwealth countries, including Tanzania, who are permanently resident there, hold at least an upper-second-class honours degree, and could not otherwise afford UK study. Must be available to start September 2027.",
-    amountText:
-      "Full UK tuition, monthly stipend (GBP 1,712 standard / GBP 2,000 London), approved airfare, study travel grant, child allowance if applicable",
+    amountText: "Full UK tuition + monthly stipend + airfare",
     windowText: "Closing date: 16:00 BST, Tuesday, October 20, 2027 (confirm exact date on the official site)",
     sourceItemId: "commonwealth-masters-scholarships",
   },

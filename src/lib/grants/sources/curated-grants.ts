@@ -34,7 +34,8 @@ export const CURATED_GRANTS: RawGrant[] = [
     url: "https://hampsongfoundation.org/project/hampsongeducation-fellowship-in-american-song/",
     applicationUrl: "https://hampsongfoundation.org/project/hampsongeducation-fellowship-in-american-song/",
     category: "arts_music",
-    eligibilityText: "U.S./international educators, performers and scholars working with American song",
+    eligibilityText:
+      "Open to members of the Society for American Music at any career phase; SAM offers international membership with no citizenship restriction stated, so Tanzanian applicants can join and apply, but membership is a prerequisite (join at american-music.org before applying).",
     focusText: "Music; performance; music education; humanities",
     amountText: "Up to $1,000",
     windowText: "Deadline: Oct 15, 2026",
