@@ -3,12 +3,12 @@
 import type { Grant, GrantCategory, GrantStatus } from "./types";
 
 const CATEGORY_LABELS: Record<GrantCategory, string> = {
-  arts_music: "Arts – Music",
-  arts_visual_photography: "Arts – Visual/Photography",
-  arts_film_media: "Arts – Film/Media",
-  arts_theater_performance: "Arts – Theater/Performance",
-  arts_multidisciplinary: "Arts – Multidisciplinary",
-  arts_residencies: "Arts – Residencies & Mobility",
+  arts_music: "Arts - Music",
+  arts_visual_photography: "Arts - Visual/Photography",
+  arts_film_media: "Arts - Film/Media",
+  arts_theater_performance: "Arts - Theater/Performance",
+  arts_multidisciplinary: "Arts - Multidisciplinary",
+  arts_residencies: "Arts - Residencies & Mobility",
   business_creative_entrepreneur: "Creative Entrepreneur / Business",
   tech_nonprofit_tech: "Tech / Nonprofit Tech",
   community_civic: "Community & Civic",
@@ -39,7 +39,7 @@ export function formatGrantAmount(amount: Grant["amount"]): string {
     const currency = amount.currency ?? "USD";
     const fmt = (n: number) => `${currency} ${n.toLocaleString("en-US")}`;
     if (amount.min != null && amount.max != null && amount.min !== amount.max) {
-      return `${fmt(amount.min)}–${fmt(amount.max)}`;
+      return `${fmt(amount.min)}-${fmt(amount.max)}`;
     }
     return fmt(amount.max ?? amount.min ?? 0);
   }

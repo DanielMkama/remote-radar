@@ -47,34 +47,34 @@ export function getApplicationGuidance(grant: GuidanceInput): ApplicationGuidanc
     checklist.push(`Size your proposal to the typical award: ${amountLabel}.`);
   }
   checklist.push(
-    "Most funders ask for some combination of a short project description or portfolio, a simple budget, proof of eligibility, and 1-2 references or work samples — have these ready before starting the official form."
+    "Most funders ask for some combination of a short project description or portfolio, a simple budget, proof of eligibility, and 1-2 references or work samples - have these ready before starting the official form."
   );
 
   switch (grant.status) {
     case "open":
       return {
-        heading: "Open now — how to apply",
+        heading: "Open now: how to apply",
         intro: `Applications are open (${formatGrantDeadline(grant)}). Apply directly on the funder's site using the button above.`,
         checklist,
       };
     case "rolling":
       return {
-        heading: "Rolling / ongoing — how to apply",
+        heading: "Rolling / ongoing: how to apply",
         intro:
           "This program accepts applications on an ongoing basis with no fixed deadline. Funders that run on a fixed annual budget can still close early once funds are spent, so applying sooner rather than later can help.",
         checklist,
       };
     case "upcoming":
       return {
-        heading: "Opens soon — get ready now",
+        heading: "Opens soon: get ready now",
         intro: `Applications aren't open yet (${formatGrantDeadline(
           grant
-        )}). This page will switch to "Open now" automatically once that date arrives — use the time before then to prepare the items below.`,
+        )}). This page will switch to "Open now" automatically once that date arrives - use the time before then to prepare the items below.`,
         checklist,
       };
     case "closed":
       return {
-        heading: "Closed for this cycle — what to prepare for next time",
+        heading: "Closed for this cycle: what to prepare for next time",
         intro: `${
           grant.windowText ? grant.windowText + " " : "This cycle's deadline has passed. "
         }Check the funder's own page for their next cycle date, and use the time now to prepare the items below.`,

@@ -257,7 +257,7 @@ const RAW_JOBS: RawMockJob[] = [
     companyLogo: null,
     url: "https://remotive.com/remote-jobs/software-dev/backend-engineer-1012",
     description:
-      "Corebase Systems is hiring a Backend Engineer to work on our distributed data platform. Fully remote, worldwide. (Not a design role — included to verify irrelevant listings are filtered out.)",
+      "Corebase Systems is hiring a Backend Engineer to work on our distributed data platform. Fully remote, worldwide. (Not a design role - included to verify irrelevant listings are filtered out.)",
     location: "Worldwide",
     isWorldwide: true,
     salaryMin: 3000,
@@ -333,7 +333,7 @@ const RAW_JOBS: RawMockJob[] = [
     companyLogo: null,
     url: "https://remotive.com/remote-jobs/design/illustrator-graphic-designer-1016",
     description:
-      "Quietroom Studio is a boutique illustration studio hiring a freelance Graphic Designer for editorial illustration work. Worldwide, project-based — rate to be discussed per project, not disclosed upfront.",
+      "Quietroom Studio is a boutique illustration studio hiring a freelance Graphic Designer for editorial illustration work. Worldwide, project-based - rate to be discussed per project, not disclosed upfront.",
     location: "Worldwide",
     isWorldwide: true,
     salaryMin: null,

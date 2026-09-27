@@ -1,11 +1,15 @@
 /**
  * Curated grants — batch 2 (added 2026-09-27 from user-provided links).
  *
- * Unlike curated-grants.ts's first batch (mostly transcribed from a
- * pre-built grants-tracking spreadsheet with real deadlines/amounts),
- * this batch came from a link-only research list — organization + URL,
+ * Filtered to opportunities open to African (incl. Tanzanian) applicants
+ * — see curated-grants.ts's header for why. This batch was already
+ * heavily Africa-focused going in, so only a few entries were removed
+ * (a Germany-university-residency program, a non-grant newsletter link,
+ * and a US-focused corporate education grant).
+ *
+ * This batch came from a link-only research list — organization + URL,
  * no stated deadline or funding amount. windowText/amountText are left
- * null rather than guessed, so these entries show status "unknown" until
+ * null rather than guessed, so these entries show status "rolling" until
  * someone confirms and adds real dates (see lib/grants/classify-status.ts).
  *
  * Two sections from the source material were deliberately NOT included:
@@ -288,15 +292,6 @@ export const CURATED_GRANTS_BATCH_2: RawGrant[] = [
     sourceItemId: "grants-for-sustainable-ai-patina-foundation",
   },
   {
-    title: "Entrepreneur-in-Residence Grants (FAU, Germany)",
-    organization: "Entrepreneur-in-Residence Grants (FAU, Germany)",
-    url: "https://oss.cs.fau.de/startups",
-    applicationUrl: "https://oss.cs.fau.de/startups",
-    category: "tech_nonprofit_tech",
-    focusText: "Open source / public goods grant",
-    sourceItemId: "entrepreneur-in-residence-grants-fau-germany",
-  },
-  {
     title: "Mastercard Foundation EdTech Fellowship — Sahara Consult Tanzania",
     organization: "Mastercard Foundation EdTech Fellowship — Sahara Consult Tanzania",
     url: "https://mastercardfdn.org",
@@ -324,15 +319,6 @@ export const CURATED_GRANTS_BATCH_2: RawGrant[] = [
     sourceItemId: "innovating-education-in-africa-african-union",
   },
   {
-    title: "Drop Dead Generous",
-    organization: "Drop Dead Generous",
-    url: "https://dropdeadgenerous.substack.com",
-    applicationUrl: "https://dropdeadgenerous.substack.com",
-    category: "tech_nonprofit_tech",
-    focusText: "EdTech / AI-powered learning programme",
-    sourceItemId: "drop-dead-generous",
-  },
-  {
     title: "AWS Education Equity Initiative",
     organization: "AWS Education Equity Initiative",
     url: "https://aws.amazon.com/education/",
@@ -340,15 +326,6 @@ export const CURATED_GRANTS_BATCH_2: RawGrant[] = [
     category: "tech_nonprofit_tech",
     focusText: "EdTech / AI-powered learning programme",
     sourceItemId: "aws-education-equity-initiative",
-  },
-  {
-    title: "F5 STEM & AI Education Grant",
-    organization: "F5 STEM & AI Education Grant",
-    url: "https://www.f5.com",
-    applicationUrl: "https://www.f5.com",
-    category: "tech_nonprofit_tech",
-    focusText: "EdTech / AI-powered learning programme",
-    sourceItemId: "f5-stem-ai-education-grant",
   },
   {
     title: "IFC Education Innovation Grant (unverified link)",

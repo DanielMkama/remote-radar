@@ -21,7 +21,7 @@ export const curatedGrantsSource: GrantSource = {
   name: "Curated Research",
   status: "active",
   notes:
-    "Manually researched from funder websites, grant aggregators and user-provided links (not a live API) — see curated-grants*.ts.",
+    "Manually researched from funder websites, grant aggregators and user-provided links (not a live API) - see curated-grants*.ts.",
   async fetch(): Promise<RawGrant[]> {
     return [...CURATED_GRANTS, ...CURATED_GRANTS_BATCH_2];
   },

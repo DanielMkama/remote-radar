@@ -25,12 +25,12 @@ export type GrantCategory =
   | "other";
 
 export const GRANT_CATEGORIES: { value: GrantCategory; label: string }[] = [
-  { value: "arts_music", label: "Arts – Music" },
-  { value: "arts_visual_photography", label: "Arts – Visual/Photography" },
-  { value: "arts_film_media", label: "Arts – Film/Media" },
-  { value: "arts_theater_performance", label: "Arts – Theater/Performance" },
-  { value: "arts_multidisciplinary", label: "Arts – Multidisciplinary" },
-  { value: "arts_residencies", label: "Arts – Residencies & Mobility" },
+  { value: "arts_music", label: "Arts - Music" },
+  { value: "arts_visual_photography", label: "Arts - Visual/Photography" },
+  { value: "arts_film_media", label: "Arts - Film/Media" },
+  { value: "arts_theater_performance", label: "Arts - Theater/Performance" },
+  { value: "arts_multidisciplinary", label: "Arts - Multidisciplinary" },
+  { value: "arts_residencies", label: "Arts - Residencies & Mobility" },
   { value: "business_creative_entrepreneur", label: "Creative Entrepreneur / Business" },
   { value: "tech_nonprofit_tech", label: "Tech / Nonprofit Tech" },
   { value: "community_civic", label: "Community & Civic Projects" },

@@ -5,6 +5,8 @@
  * at ingestion time rather than changing how the UI renders descriptions.
  */
 
+import { stripDashes } from "@/lib/text";
+
 const BLOCK_TAGS = /<\/(p|div|li|h[1-6]|tr)>/gi;
 const BREAK_TAGS = /<br\s*\/?>/gi;
 const LIST_ITEM_OPEN = /<li[^>]*>/gi;
@@ -28,7 +30,7 @@ const ENTITIES: Record<string, string> = {
 
 /** Replaces em/en dashes with a plain hyphen. Used on every field the app displays. */
 export function stripEmDashes(text: string): string {
-  return text.replace(/[—–]/g, "-");
+  return stripDashes(text);
 }
 
 export function htmlToPlainText(html: string | null | undefined): string {
@@ -45,9 +47,9 @@ export function htmlToPlainText(html: string | null | undefined): string {
     text = text.split(entity).join(char);
   }
 
-  // Some sources write em/en dashes directly (not as HTML entities) —
+  // Some sources write em/en dashes directly (not as HTML entities) -
   // normalize those too so nothing the app displays contains one.
-  text = text.replace(/[—–]/g, "-");
+  text = stripDashes(text);
 
   return text
     .split("\n")
