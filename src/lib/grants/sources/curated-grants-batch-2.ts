@@ -1102,6 +1102,65 @@ export const CURATED_GRANTS_BATCH_2: RawGrant[] = [
     sourceItemId: "1-54-contemporary-african-art-fair",
   },
   {
+    title: "Mozilla Fellows Program",
+    organization: "Mozilla Foundation",
+    url: "https://foundation.mofostaging.net/en/what-we-do/grantmaking/fellowship/2026-nominations-request/",
+    applicationUrl: "https://foundation.mofostaging.net/en/what-we-do/grantmaking/fellowship/2026-nominations-request/",
+    category: "tech_nonprofit_tech",
+    focusText:
+      "Year-long fellowship (funding, mentorship, platform access) for leaders building better technology futures: privacy protection, AI auditing, climate justice, creator protection, data democratization, open infrastructure.",
+    eligibilityText:
+      "Track II Independent Fellows track is open to candidates from all countries where Mozilla Foundation can legally make grants, with particular focus on recruiting from the Global Majority (including Africa); self-nominations welcome. Fellows must be able to legally enter a grant agreement with a US-based 501c3 and receive payment via ACH/wire from the US. Track I Embedded Fellows is limited to Kenya, South Africa, Brazil, MENA, Mexico, UK, US and EU.",
+    amountText: "Track I: $100,000 total ($75,000 stipend + $25,000 project budget). Track II: $125,000 total ($100,000 stipend + $25,000 project budget)",
+    windowText: "2026 cohort nominations closed January 30, 2026; future deadlines communicated by email, next cycle not yet announced",
+    sourceItemId: "mozilla-fellows-program",
+  },
+  {
+    title: "AU Digital and Innovation Fellowship Programme",
+    organization: "African Union Commission",
+    url: "https://www.au.int/en/pressreleases/20260218/au-call-applications-3rd-cohort-digital-innovation-fellowship",
+    applicationUrl: "https://enpact.org/au-digital-innovation-fellowship-positions/",
+    category: "tech_nonprofit_tech",
+    focusText:
+      "12-month immersive fellowship embedding young technical professionals within AU institutions, across tracks including data analytics, digital product management, ERP systems, full-stack development, HR digital systems and business analysis.",
+    eligibilityText:
+      "Open to citizens of African Union member states (including Tanzania), under age 35, with a bachelor's degree in a relevant technical field. Women and persons with disabilities are especially encouraged to apply.",
+    amountText: "Monthly stipend, equipment budget, learning budget, plus bootcamp and mid-term delegation visit",
+    windowText: "3rd cohort applications closed March 1, 2026; watch for the next cohort announcement",
+    sourceItemId: "au-digital-and-innovation-fellowship-programme",
+  },
+  {
+    title: "Building Beyond Fellowship",
+    organization: "Prince Claus Fund",
+    url: "https://princeclausfund.nl/awards-and-programmes/fellows-award/building-beyond",
+    applicationUrl: "https://princeclausfund.nl/awards-and-programmes/fellows-award/building-beyond",
+    category: "arts_residencies",
+    focusText:
+      "Multi-disciplinary fellowship for mid-career artists/cultural practitioners (architecture, design, spatial practice) exploring how communities relate to each other and public space in their cities.",
+    eligibilityText:
+      "Open to applicants from, living and working in eligible African countries, explicitly including Tanzania. Requires roughly 7-15 years of professional experience and an individual creative practice (not arts managers/academics without their own practice); fluent English required.",
+    amountText: "EUR 10,000 per fellow plus mentorship from Senior Fellows",
+    windowText:
+      "Cycle 5 applications closed August 13, 2025; from 2025/2026 the program is run solely by Prince Claus Fund and next cycle dates are not yet announced, contact e.vanschie@princeclausfund.nl for updates",
+    sourceItemId: "building-beyond-fellowship-prince-claus-fund",
+  },
+  {
+    title: "STIAS Fellowships (Individual, Team, Iso Lomso, Artist-in-Residence)",
+    organization: "Stellenbosch Institute for Advanced Study (STIAS)",
+    url: "https://www.stias.ac.za/fellowships/apply/",
+    applicationUrl: "https://www.stias.ac.za/fellowships/apply/",
+    category: "arts_residencies",
+    focusText:
+      "Residential fellowships for dedicated research/creative time: Individual and Team Fellowships (any discipline, any career stage, worldwide), Iso Lomso Fellowship (early-to-mid-career African researchers), and Artist-in-Residence (any discipline, no geographic restriction).",
+    eligibilityText:
+      "Individual, Team and Artist-in-Residence fellowships have no country-of-origin restriction. Iso Lomso is restricted to African nationals or those affiliated with African institutions (Tanzania qualifies), doctorate earned within the preceding 8 years, applicant under age 42.",
+    amountText:
+      "Iso Lomso: economy airfare, accommodation, monthly stipend, office space, library access, childcare subsidies, conference/residency support. Other tracks: stipend details vary, contact STIAS.",
+    windowText:
+      "Individual/Team/Artist-in-Residence: deadline October 31, 2026 (for 2028 1st semester). Iso Lomso: next call opens October 15, 2026, deadline February 15, 2027.",
+    sourceItemId: "stias-fellowships",
+  },
+  {
     title: "Block Builder Fellowship",
     organization: "Block, Inc.",
     url: "https://block.xyz/builder-fellowship",
@@ -1115,5 +1174,61 @@ export const CURATED_GRANTS_BATCH_2: RawGrant[] = [
     windowText:
       "Applications currently closed for both the design and engineering tracks; sign up on the program page for notice of the next cycle.",
     sourceItemId: "block-builder-fellowship",
+  },
+  {
+    title: "MOSS Foundational Technology Track",
+    organization: "Mozilla Open Source Support (MOSS)",
+    url: "https://www.mozilla.org/en-US/moss/foundational-technology/",
+    applicationUrl: "https://mozilla.fluxx.io/apply/MOSS",
+    category: "tech_nonprofit_tech",
+    focusText:
+      "Grants for open source/free software projects that Mozilla itself relies on or uses in its infrastructure.",
+    eligibilityText:
+      "The project's home can be anywhere in the world where Mozilla can make payment without undue burden, so Tanzania and other African locations are eligible. Application must be filed jointly by the project lead and an established Mozilla employee sponsor; legally organized projects are preferred over unaffiliated individuals.",
+    amountText: "USD 10,000 to USD 250,000",
+    windowText: "Rolling, considered monthly; typical response time about two months, no fixed deadline",
+    sourceItemId: "moss-foundational-technology-track",
+  },
+  {
+    title: "SYFoA Leadership Fellowship",
+    organization: "Story-Your-Future of Africa (SYFoA)",
+    url: "https://syfoa.chiefmoses.org/wp/apply-2/",
+    applicationUrl: "https://syfoa.chiefmoses.org/wp/apply-2/",
+    category: "community_civic",
+    focusText:
+      "Six-month leadership development fellowship for young African leaders, welcoming applicants from social development, entrepreneurship, governance, education, technology, creative industries and community advocacy.",
+    eligibilityText:
+      "Open to applicants currently residing in an African country, including Tanzania. Ages 18-30 (as of September 30, 2026), English proficiency, full availability for the six-month program, ability to attend an in-person residency in Accra, Ghana, and a valid passport through June 2027.",
+    amountText: null,
+    windowText: "Deadline: September 30, 2026",
+    sourceItemId: "syfoa-leadership-fellowship",
+  },
+  {
+    title: "Artizen House Zanzibar Residency",
+    organization: "Artizen House Zanzibar",
+    url: "https://artizenhousezanzibar.com/",
+    applicationUrl: "https://artizenhousezanzibar.com/apply",
+    category: "arts_residencies",
+    focusText:
+      "A recurring small-group creative residency embedded inside larger pop-up cities and gatherings, based in Zanzibar, Tanzania, bringing a handful of creators together to make work in the same room.",
+    eligibilityText:
+      "Based in Zanzibar, Tanzania, so Tanzanian applicants are inherently eligible; the organization's public pages do not publish full eligibility, cost, or funding details, confirm directly on their apply page before relying on this listing.",
+    amountText: null,
+    windowText: null,
+    sourceItemId: "artizen-house-zanzibar-residency",
+  },
+  {
+    title: "ADW Future Design Fellowship",
+    organization: "Asia Design Week / ADW Future Design Scholars Program",
+    url: "https://www.adwscholar.com/2026-fellowship/",
+    applicationUrl: "https://www.adwscholar.com/2026-fellowship/",
+    category: "arts_multidisciplinary",
+    focusText:
+      "Independent, design-centered interdisciplinary research fellowship; 2026 theme is Design Beyond Boundaries: Convergence, Creativity, and Sustainable Innovation.",
+    eligibilityText:
+      "Welcomes applicants worldwide with no nationality restriction, so Tanzania and other African applicants are eligible. Applicants should typically hold a doctorate or equivalent advanced research credentials.",
+    amountText: "Up to USD 100,000 for up to 12 months, including a monthly stipend of USD 7,500",
+    windowText: "2026 cycle closed May 31, 2026; award coordination underway, next cycle not yet announced",
+    sourceItemId: "adw-future-design-fellowship",
   },
 ];
