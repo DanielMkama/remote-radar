@@ -1231,4 +1231,18 @@ export const CURATED_GRANTS_BATCH_2: RawGrant[] = [
     windowText: "2026 cycle closed May 31, 2026; award coordination underway, next cycle not yet announced",
     sourceItemId: "adw-future-design-fellowship",
   },
+  {
+    title: "YUX Fellowship Program",
+    organization: "YUX",
+    url: "https://yux.design/index.php/en-gb/job_offers/yux-fellowship-program",
+    applicationUrl: "https://yux.design/index.php/en-gb/job_offers/yux-fellowship-program",
+    category: "tech_nonprofit_tech",
+    focusText:
+      "Pan-African human-centered design and UX research consultant network, working on projects across health, education, agriculture and fintech, based in cities including Dakar, Accra, Lagos, Abuja, Kigali, Nairobi and Brazzaville.",
+    eligibilityText:
+      "Open pan-African, no country is excluded (Tanzania included); best suited to designers/researchers who have already worked with YUX or can otherwise demonstrate relevant experience. Fellows receive a monthly salary while actively collaborating on a project.",
+    amountText: null,
+    windowText: null,
+    sourceItemId: "yux-fellowship-program",
+  },
 ];
