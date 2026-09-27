@@ -45,12 +45,15 @@ export const GRANT_CATEGORIES: { value: GrantCategory; label: string }[] = [
  */
 export type GrantStatus = "open" | "closed" | "upcoming" | "rolling" | "unknown";
 
+// "unknown" is deliberately excluded here: classifyGrantStatus() never
+// returns it (see lib/grants/classify-status.ts) — it's kept in the
+// GrantStatus type only as a defensive fallback for unexpected data, so
+// offering it as a filter option would always yield zero results.
 export const GRANT_STATUSES: { value: GrantStatus; label: string }[] = [
   { value: "open", label: "Open now" },
   { value: "upcoming", label: "Opens soon" },
   { value: "rolling", label: "Rolling / ongoing" },
   { value: "closed", label: "Closed" },
-  { value: "unknown", label: "Unknown" },
 ];
 
 export interface GrantAmount {
