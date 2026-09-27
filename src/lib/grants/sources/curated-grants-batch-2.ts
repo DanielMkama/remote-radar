@@ -1245,4 +1245,167 @@ export const CURATED_GRANTS_BATCH_2: RawGrant[] = [
     windowText: null,
     sourceItemId: "yux-fellowship-program",
   },
+  {
+    title: "Slow Factory Fellowship",
+    organization: "Slow Factory",
+    url: "https://slowfactory.earth/fellows",
+    applicationUrl: "https://slowfactory.earth/fellows",
+    category: "arts_multidisciplinary",
+    focusText:
+      "Fellowship for artists, researchers, organizers, writers, designers, technologists and cultural workers whose work expands political imagination toward a more just, equitable and sustainable future; prioritizes Black, Brown, Indigenous and Disabled creators.",
+    eligibilityText:
+      "No explicit nationality or geographic restriction stated; the cohort already represents 24 diasporic communities across 11 countries on 4 continents, so Tanzania and other African applicants are eligible.",
+    amountText: "USD 1,000 grant per fellow, plus interdisciplinary cohort membership and lifetime network access",
+    windowText: "Rolling basis, no fixed deadline",
+    sourceItemId: "slow-factory-fellowship",
+  },
+  {
+    title: "Intellect Africa Summer Fellowship",
+    organization: "Intellect Africa",
+    url: "https://www.intellect.africa/fellowship",
+    applicationUrl: "https://www.intellect.africa/fellowship",
+    category: "tech_nonprofit_tech",
+    focusText:
+      "5-week, fully virtual fellowship for undergraduate students across Africa, working in interdisciplinary teams across Engineering, Product Development and Entrepreneurship tracks on education, health, finance, climate and civic-innovation projects.",
+    eligibilityText:
+      "Open to undergraduate students across Africa, including Tanzania; no prior experience required. Includes financial support (e.g. internet support) to reduce participation barriers.",
+    amountText: null,
+    windowText: "Applications closed for the current cohort; contact john@intellect.africa for the next cohort's dates",
+    sourceItemId: "intellect-africa-summer-fellowship",
+  },
+  {
+    title: "African Design Centre Fellowship",
+    organization: "MASS Design Group",
+    url: "https://modelofarchitecture.org/mass-opens-applications-next-cohort-african-design-centre-fellowship",
+    applicationUrl: "https://massdesigngroup.slideroom.com/#/permalink/program/89183",
+    category: "arts_residencies",
+    focusText:
+      "12-month, paid, hands-on residency in Kigali, Rwanda researching and piloting community-centered design solutions for maternal health, economic opportunity, climate resilience and education.",
+    eligibilityText:
+      "Open to nationals of any African country, including Tanzania. Applicants must be 35 or younger, hold a degree in architecture, urban design, landscape architecture, engineering or a related field, and be able to relocate to Kigali, Rwanda for the full program (October 2026 to September 2027).",
+    amountText: "Paid fellowship; specific stipend amount not published",
+    windowText: null,
+    sourceItemId: "african-design-centre-fellowship",
+  },
+  {
+    title: "Open Society Foundations Fellowship",
+    organization: "Open Society Foundations",
+    url: "https://www.opensocietyfoundations.org/how-we-work/programs/open-society-fellowship",
+    applicationUrl: "https://www.opensocietyfoundations.org",
+    category: "community_civic",
+    focusText:
+      "Supports individuals pursuing innovative projects addressing open-society challenges through writing, research, advocacy and the arts.",
+    eligibilityText: "Open to Pan-African applicants, including Tanzania (verify any additional restrictions on the official site).",
+    amountText: "Stipend plus project support (exact figure not published)",
+    windowText: "Deadline: September 30, 2026",
+    sourceItemId: "open-society-foundations-fellowship",
+  },
+  {
+    title: "Westerwelle Young Founders Programme",
+    organization: "Westerwelle Foundation",
+    url: "https://www.westerwelle-foundation.com/young-founders-programme",
+    applicationUrl: "https://www.westerwelle-foundation.com",
+    category: "business_creative_entrepreneur",
+    focusText:
+      "Six-month entrepreneurship programme for outstanding young founders from emerging economies, combining an in-person bootcamp in Germany with remote mentorship and access to an international founder network.",
+    eligibilityText: "Open to Pan-African applicants, including Tanzania. Free to apply; never pay a fee.",
+    amountText: "No direct cash grant; mentorship, bootcamp and global founder network access",
+    windowText: "Deadline: September 30, 2026",
+    sourceItemId: "westerwelle-young-founders-programme",
+  },
+  {
+    title: "ALX Software Engineering Programme",
+    organization: "ALX Africa",
+    url: "https://www.alxafrica.com/programme/software-engineering/",
+    applicationUrl: "https://www.alxafrica.com",
+    category: "tech_nonprofit_tech",
+    focusText: "Free, 100% online, 12-month software engineering training programme with peer learning and career support.",
+    eligibilityText: "Open Pan-African, including Tanzania. Completely free; never pay a fee.",
+    amountText: "Free tuition (training programme, not a cash grant)",
+    windowText: "Rolling, apply anytime",
+    sourceItemId: "alx-software-engineering-programme",
+  },
+  {
+    title: "Commonwealth Master's Scholarships",
+    organization: "Commonwealth Scholarship Commission (UK)",
+    url: "https://cscuk.fcdo.gov.uk/scholarships/commonwealth-masters-scholarships/",
+    applicationUrl: "https://cscuk.fcdo.gov.uk/scholarships/commonwealth-masters-scholarships/",
+    category: "other",
+    focusText:
+      "Fully funded master's study at UK universities for candidates from low- and middle-income Commonwealth countries, targeting the CSC's sustainable-development themes.",
+    eligibilityText:
+      "Open to citizens (or refugees) of eligible Commonwealth countries, including Tanzania, who are permanently resident there, hold at least an upper-second-class honours degree, and could not otherwise afford UK study. Must be available to start September 2027.",
+    amountText:
+      "Full UK tuition, monthly stipend (GBP 1,712 standard / GBP 2,000 London), approved airfare, study travel grant, child allowance if applicable",
+    windowText: "Closing date: 16:00 BST, Tuesday, October 20, 2027 (confirm exact date on the official site)",
+    sourceItemId: "commonwealth-masters-scholarships",
+  },
+  {
+    title: "Chevening Scholarships",
+    organization: "UK Government (FCDO)",
+    url: "https://www.chevening.org/scholarship/tanzania/",
+    applicationUrl: "https://www.chevening.org/scholarship/tanzania/",
+    category: "other",
+    focusText:
+      "Fully funded one-year taught master's degrees at UK universities for future leaders, with priority areas including climate action, economic prosperity and conflict recovery.",
+    eligibilityText: "Tanzania has its own dedicated Chevening country page confirming eligibility for the 2027/28 cohort.",
+    amountText: "Funded by the UK Foreign, Commonwealth and Development Office and partner organisations",
+    windowText: "Deadline: October 6, 2026, 11:00 UTC",
+    sourceItemId: "chevening-scholarships-tanzania",
+  },
+  {
+    title: "MLH Fellowship",
+    organization: "Major League Hacking (MLH)",
+    url: "https://fellowship.mlh.com/",
+    applicationUrl: "https://fellowship.mlh.com/",
+    category: "tech_nonprofit_tech",
+    focusText:
+      "Fully remote, 12-week paid internship alternative collaborating on real open source projects with engineers from companies like GitHub, Google and Meta, across Software Engineering, Production Engineering/SRE, and Web3 tracks.",
+    eligibilityText:
+      "Open to applicants worldwide (including Tanzania) not residing in a US-embargoed country; currently paused for the Asia-Pacific region specifically (not Africa). Requires being 18+, proficient English, prior participation in an MLH Hackathon or Global Hack Week event, and a 20-hour/week commitment plus reliable internet.",
+    amountText: "University credit or an educational stipend (amount varies by program)",
+    windowText: null,
+    sourceItemId: "mlh-fellowship",
+  },
+  {
+    title: "Google Summer of Code",
+    organization: "Google",
+    url: "https://summerofcode.withgoogle.com/",
+    applicationUrl: "https://summerofcode.withgoogle.com/",
+    category: "tech_nonprofit_tech",
+    focusText: "Global online program bringing new contributors into open source software development on 12+ week mentored projects.",
+    eligibilityText:
+      "Open worldwide, including Tanzania, to applicants 18+ who are eligible to work in their country of residence; currently excludes only Russia, Belarus and the DNR/LNR regions.",
+    amountText: "Stipend for contributors who pass evaluations (amount varies by program/region)",
+    windowText: null,
+    sourceItemId: "google-summer-of-code",
+  },
+  {
+    title: "Grohwie Design Fellowship",
+    organization: "Grohwie",
+    url: "https://www.grohwie.com/fellowship",
+    applicationUrl: "https://tally.so/r/Gxr4gZ",
+    category: "business_creative_entrepreneur",
+    focusText:
+      "8-week fellowship for early-stage digital designers (illustration, video, posters, apps, branding) focused on business/soft skills: pricing strategy, client acquisition, freelance portfolio and job search preparation.",
+    eligibilityText:
+      "Open to applicants anywhere in the world, including Tanzania. Requires 1-3 years of design experience and being currently underearning from design work; no polished portfolio required.",
+    amountText: null,
+    windowText: "Deadline: March 23, 2026",
+    sourceItemId: "grohwie-design-fellowship",
+  },
+  {
+    title: "Child-Centred Design Fellowship for Africa",
+    organization: "Kutunga (with Children's Voice Today and Action Against Child Sexual Abuse Initiative)",
+    url: "https://www.linkedin.com/posts/kutunga_kutunga-activity-7425550216231120897-tWnS",
+    applicationUrl: "https://lnkd.in/erQm7hPE",
+    category: "tech_nonprofit_tech",
+    focusText:
+      "Fully virtual fellowship (April-August 2026) for designers, developers and technologists on ethical, child-centred digital design and responsible AI tool development for children, including an Innovation Lab and learning community.",
+    eligibilityText:
+      "Open across Africa, including Tanzania (250 slots; named examples include Nigeria, Rwanda, South Africa). Note: this program charges a subsidized participation fee of USD 50, unlike most other listings here which are free or pay the fellow.",
+    amountText: "Subsidized fee of USD 50 to participate (not a cash award to fellows)",
+    windowText: "Deadline: March 2, 2026",
+    sourceItemId: "child-centred-design-fellowship-for-africa",
+  },
 ];
