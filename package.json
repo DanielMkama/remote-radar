@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "ingest": "tsx scripts/ingest.ts",
+    "ingest:grants": "tsx scripts/ingest-grants.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },

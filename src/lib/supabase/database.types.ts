@@ -118,6 +118,74 @@ export type JobInsert = Omit<JobRow, "id" | "collected_at" | "created_at" | "upd
   updated_at?: string;
 };
 
+export type GrantRow = {
+  id: string;
+  title: string;
+  organization: string;
+  organization_url: string | null;
+  description: string;
+  url: string;
+  application_url: string;
+  source: string;
+  source_url: string;
+  source_id: string | null;
+  category: string;
+  tags: string[];
+  eligibility_text: string | null;
+  focus_text: string | null;
+  amount_text: string | null;
+  amount_currency: string | null;
+  amount_min: number | null;
+  amount_max: number | null;
+  window_text: string | null;
+  opens_at: string | null;
+  deadline: string | null;
+  is_rolling: boolean;
+  posted_at: string | null;
+  discovered_at: string;
+  raw_source_data: unknown;
+  status: string;
+  duplicate_fingerprint: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type GrantInsert = Omit<GrantRow, "created_at" | "updated_at"> & {
+  created_at?: string;
+  updated_at?: string;
+};
+
+export type GrantSourceRow = {
+  id: string;
+  grant_id: string;
+  source: string;
+  source_id: string | null;
+  source_url: string;
+  discovered_at: string;
+};
+
+export type GrantSourceInsert = Omit<GrantSourceRow, "id"> & { id?: string };
+
+export type GrantSourceRunRow = {
+  id: string;
+  source: string;
+  status: "ok" | "error";
+  started_at: string;
+  finished_at: string;
+  fetched_count: number;
+  eligible_count: number;
+  new_count: number;
+  updated_count: number;
+  duplicate_count: number;
+  error_message: string | null;
+  created_at: string;
+};
+
+export type GrantSourceRunInsert = Omit<GrantSourceRunRow, "id" | "created_at"> & {
+  id?: string;
+  created_at?: string;
+};
+
 // supabase-js's generics (GenericTable / GenericSchema, from
 // @supabase/postgrest-js) require every table to carry `Relationships`
 // and every schema to carry `Views`/`Functions`/`Enums`/`CompositeTypes`,
@@ -151,6 +219,24 @@ export type Database = {
         Row: JobRow;
         Insert: JobInsert;
         Update: Partial<JobInsert>;
+        Relationships: [];
+      };
+      grants: {
+        Row: GrantRow;
+        Insert: GrantInsert;
+        Update: Partial<GrantInsert>;
+        Relationships: [];
+      };
+      grant_sources: {
+        Row: GrantSourceRow;
+        Insert: GrantSourceInsert;
+        Update: Partial<GrantSourceInsert>;
+        Relationships: [];
+      };
+      grant_source_runs: {
+        Row: GrantSourceRunRow;
+        Insert: GrantSourceRunInsert;
+        Update: Partial<GrantSourceRunInsert>;
         Relationships: [];
       };
     };

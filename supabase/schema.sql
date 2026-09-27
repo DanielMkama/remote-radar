@@ -220,3 +220,138 @@ drop policy if exists "Public read access" on source_runs;
 create policy "Public read access"
   on source_runs for select
   using (true);
+
+-- =============================================================================
+-- Grants, fellowships & funding opportunities
+-- =============================================================================
+-- Deliberately a SEPARATE feature/table from `opportunities` above, even
+-- though the word "opportunity" is tempting for both: `opportunities`
+-- already means "job/contract/freelance listing" throughout this codebase
+-- (src/lib/opportunities/, the /api/opportunities route, etc.). Grants have
+-- a different shape (funding amount instead of salary, a real deadline
+-- instead of an optional one, eligibility instead of employment type) and
+-- a different ingestion pattern (curated/manually-researched data, not a
+-- public per-source API) — see src/lib/grants/.
+
+create table if not exists grants (
+  id                uuid primary key default gen_random_uuid(),
+
+  title             text not null,
+  organization      text not null,
+  organization_url  text,
+  description       text not null default '',
+
+  url               text not null,          -- program/info page
+  application_url   text not null,          -- where to actually apply (often the same link)
+  source            text not null,          -- canonical source id, e.g. 'curated-research'
+  source_url        text not null,
+  source_id         text,                    -- the source's own id/slug for this entry
+
+  category          text not null default 'other'
+                       check (category in (
+                         'arts_music', 'arts_visual_photography', 'arts_film_media',
+                         'arts_theater_performance', 'arts_multidisciplinary',
+                         'business_creative_entrepreneur', 'tech_nonprofit_tech',
+                         'community_civic', 'other'
+                       )),
+  tags              text[] not null default '{}',
+
+  eligibility_text  text,                    -- who/where — original "Location / Eligibility" text, never discarded
+  focus_text        text,                    -- "Eligible Disciplines / Focus" — original text, never discarded
+
+  amount_text       text,                    -- original, as stated by the source. Never overwritten with an estimate.
+  amount_currency   text default 'USD',
+  amount_min        numeric,
+  amount_max        numeric,
+
+  window_text       text,                    -- original application-window text, e.g. "Open Sep 1-Oct 28, 2026"
+  opens_at          timestamptz,             -- best-effort parse of window_text — see lib/grants/parse-window.ts
+  deadline          timestamptz,             -- best-effort parse of window_text
+  is_rolling        boolean not null default false,
+
+  posted_at         timestamptz,
+  discovered_at     timestamptz not null default now(),
+
+  raw_source_data   jsonb,
+
+  status            text not null default 'unknown'
+                       check (status in ('open', 'closed', 'upcoming', 'rolling', 'unknown')),
+  duplicate_fingerprint text not null,
+
+  created_at        timestamptz not null default now(),
+  updated_at        timestamptz not null default now(),
+
+  constraint grants_duplicate_fingerprint_unique unique (duplicate_fingerprint)
+);
+
+create index if not exists idx_grants_source                on grants (source);
+create index if not exists idx_grants_category              on grants (category);
+create index if not exists idx_grants_status                on grants (status);
+create index if not exists idx_grants_deadline              on grants (deadline);
+create index if not exists idx_grants_discovered_at         on grants (discovered_at desc);
+create index if not exists idx_grants_duplicate_fingerprint on grants (duplicate_fingerprint);
+
+drop trigger if exists grants_set_updated_at on grants;
+create trigger grants_set_updated_at
+  before update on grants
+  for each row
+  execute function set_updated_at();
+
+alter table grants enable row level security;
+
+drop policy if exists "Public read access" on grants;
+create policy "Public read access"
+  on grants for select
+  using (true);
+
+-- `grant_sources`: every place a canonical grant was seen (mirrors
+-- `opportunity_sources`) — lets the same grant found on the funder's own
+-- site AND a grants aggregator collapse to one row.
+create table if not exists grant_sources (
+  id            uuid primary key default gen_random_uuid(),
+  grant_id      uuid not null references grants(id) on delete cascade,
+  source        text not null,
+  source_id     text,
+  source_url    text not null,
+  discovered_at timestamptz not null default now(),
+
+  constraint grant_sources_unique unique (grant_id, source)
+);
+
+create index if not exists idx_grant_sources_grant_id on grant_sources (grant_id);
+create index if not exists idx_grant_sources_source    on grant_sources (source);
+
+alter table grant_sources enable row level security;
+
+drop policy if exists "Public read access" on grant_sources;
+create policy "Public read access"
+  on grant_sources for select
+  using (true);
+
+-- `grant_source_runs`: ingestion run history for grant sources (mirrors
+-- `source_runs`, kept as its own table since the stat columns differ —
+-- grants track "eligible" counts, not "worldwide"/"in_range" salary counts).
+create table if not exists grant_source_runs (
+  id                uuid primary key default gen_random_uuid(),
+  source            text not null,
+  status            text not null check (status in ('ok', 'error')),
+  started_at        timestamptz not null,
+  finished_at       timestamptz not null,
+  fetched_count     integer not null default 0,
+  eligible_count    integer not null default 0,
+  new_count         integer not null default 0,
+  updated_count     integer not null default 0,
+  duplicate_count   integer not null default 0,
+  error_message     text,
+  created_at        timestamptz not null default now()
+);
+
+create index if not exists idx_grant_source_runs_source     on grant_source_runs (source);
+create index if not exists idx_grant_source_runs_started_at on grant_source_runs (started_at desc);
+
+alter table grant_source_runs enable row level security;
+
+drop policy if exists "Public read access" on grant_source_runs;
+create policy "Public read access"
+  on grant_source_runs for select
+  using (true);
