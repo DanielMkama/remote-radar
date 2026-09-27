@@ -374,7 +374,7 @@ export const CURATED_GRANTS: RawGrant[] = [
     eligibilityText: "Worldwide open-source maintainers (individuals or teams of up to 3) with an active GitHub profile",
     focusText: "Open-source project security improvements",
     amountText: "Funding tied to completed security work; amount varies by session",
-    windowText: "Rolling sessions (a recent session closed Aug 18, 2026); check site for the next session",
+    windowText: "Rolling, applications open continuously and considered for all upcoming program sessions",
     sourceItemId: "github-secure-open-source-fund",
   },
   {
