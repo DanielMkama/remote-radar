@@ -1101,4 +1101,19 @@ export const CURATED_GRANTS_BATCH_2: RawGrant[] = [
     focusText: "Contemporary art fair / biennial with open calls",
     sourceItemId: "1-54-contemporary-african-art-fair",
   },
+  {
+    title: "Block Builder Fellowship",
+    organization: "Block, Inc.",
+    url: "https://block.xyz/builder-fellowship",
+    applicationUrl: "https://block.xyz/builder-fellowship",
+    category: "tech_nonprofit_tech",
+    focusText:
+      "6-month, fully-paid, remote-first fellowship placing emerging AI/design/engineering talent within Block's teams (Square, Cash App, Afterpay, TIDAL, Proto, Bitkey).",
+    eligibilityText:
+      "Remote-first program open worldwide to applicants already authorized to work in their own country of residence (no visa sponsorship or relocation required). Engineering track requires age 18+; design track considered case-by-case from age 14+. Applicants must show proof of building (code, prototypes, design work, or creative projects).",
+    amountText: "Fully paid, 6-month program with benefits and equipment provided",
+    windowText:
+      "Applications currently closed for both the design and engineering tracks; sign up on the program page for notice of the next cycle.",
+    sourceItemId: "block-builder-fellowship",
+  },
 ];
